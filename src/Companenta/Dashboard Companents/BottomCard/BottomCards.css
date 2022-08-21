@@ -1,0 +1,158 @@
+#footer {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    justify-content: center;
+}
+
+#bottom-contact-container {
+    width: 48%;
+    background-color: #F9FAFF;
+    display: flex;
+    flex-direction: column;
+    padding: 30px 0;
+    gap: 1.5rem;
+}
+
+#bottom-contact-container-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 28px 0 20px;
+}
+
+#bottom-contact-container-left {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+#bottom-contact-container-left>p {
+    color: #8A96B1;
+}
+
+#bottom-contact-container-left>p>span {
+    color: #676f82;
+    font-weight: 600;
+}
+
+#bottom-contact-container-right>button {
+    background-color: #5149E4;
+    width: 50px;
+    height: 50px;
+    border: none;
+    outline: none;
+    color: white;
+    font-size: 30px;
+}
+
+#bottom-contact-container-user {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 28px;
+}
+
+#bottom-contact-container-user-left {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+#bottom-contact-container-user-left-div {
+    width: 50px;
+    height: 50px;
+    background-color: #8A96B1;
+}
+
+#bottom-contact-container-user-left-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+#bottom-contact-container-user-left-text>p {
+    color: #8A96B1;
+}
+
+#bottom-contact-container-user-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+#bottom-contact-container-user-right-first {
+    background-color: #ECEFF7;
+    padding: 12px 13px;
+}
+
+#bottom-contact-container-user-right-second {
+    background-color: #ECEFF7;
+    padding: 16px;
+}
+
+#bottom-contact-btn {
+    width: 90%;
+    margin: 0 auto;
+    background-color: #ECEFF7;
+    outline: none;
+    border: 1px solid #ECEFF7;
+    padding-block: 18px;
+    color: #5149E4;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+
+
+
+
+
+
+
+
+#bottom-message-container {
+    width: 48%;
+    background-color: #F9FAFF;
+    display: flex;
+    flex-direction: column;
+    padding: 30px 0;
+    gap: 1.5rem;
+}
+
+#bottom-message-container-right>a {
+    text-decoration: none;
+    color: #5149E4;
+}
+
+#bottom-message-container-main {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+#bottom-message-container-main-user-right>button {
+    background-color: #5149E4;
+    color: white;
+    outline: none;
+    border: 1px solid #5149E4;
+    padding: 11px;
+    font-size: 17px;
+}
+
+#bottom-message-container-main-user-right>img {
+    padding-right: 8px;
+}
+
+#bottom-message-container-footer {
+    padding-block: 18px;
+}
+
+#bottom-message-container-footer>button {
+    background: none;
+    outline: none;
+    border: none;
+    color: #5149E4;
+    font-weight: 600;
+    font-size: 18px;
+    width: 90%;
+}
