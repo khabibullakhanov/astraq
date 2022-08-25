@@ -11,7 +11,9 @@ import { Header } from '../../Companenta/Header/Header';
 import { DashboardRightCard } from '../../Companenta/Dashboard Companents/DashboardRightCard.js/DashboardRightCard';
 import { Persent } from '../../Companenta/Persent/Persent';
 import { DashboardActivity } from '../../Companenta/Dashboard Companents/DashboardActivity/DashboardActivity';
-
+import { DashboardPieChart } from '../../Companenta/Dashboard Companents/Pie Chart/DashboardPieChart';
+import pinkTolqin from "../../Assets/Images/Vector (8).png"
+import kokTolqin from "../../Assets/Images/Vector (9).png"
 
 export function Dashboard() {
     return (
@@ -41,7 +43,45 @@ export function Dashboard() {
                         </div>
                     </div>
                 </div>
-                <PureComponent />
+                <PureComponent id="chart-height" />
+                <div id="dashboard-piechart-container">
+                    <div id="dashboard-piechart">
+                        <div id="column-charts">
+                            <DashboardPieChart />
+                            <p>Invoices Made</p>
+                        </div>
+                        <div id="column-charts">
+                            <DashboardPieChart />
+                            <p>Clients Growth</p>
+                        </div>
+                        <div id="column-charts">
+                            <DashboardPieChart />
+                            <p>Projects Done</p>
+                        </div>
+                    </div>
+                    <div id="dashboard-piechart-container-center">
+                    </div>
+                    <div id="dashboard-piechart-container-right">
+                        <div id="dashboard-piechart-container-right-top">
+                            <div>
+                                <p className='red-color' id='grey-color'>Completed</p>
+                                <h2 id="font-weight-600">932 Task</h2>
+                            </div>
+                            <div>
+                                <img src={pinkTolqin} alt="" />
+                            </div>
+                        </div>
+                        <div id="dashboard-piechart-container-right-top">
+                            <div>
+                                <p className='red-color' id='grey-color'>Total  Project</p>
+                                <h2 id="font-weight-600">1.932 Projects</h2>
+                            </div>
+                            <div>
+                                <img src={kokTolqin} alt="" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div id="balance-container">
                     <div id='first-balance-container'>
                         <div id='first-balance-container-left'>
@@ -102,7 +142,7 @@ export function Dashboard() {
                 <h1>Recent Activity</h1>
                 <DashboardActivity />
             </div>
-            
+
         </div>
     )
 }

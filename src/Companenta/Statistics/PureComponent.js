@@ -87,7 +87,7 @@ export function PureComponent() {
 
 
     return (
-        <ResponsiveContainer width="100%" height="30%">
+        <ResponsiveContainer width="100%" height="90%">
             <BarChart
                 width={100}
                 height={10}

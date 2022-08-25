@@ -11,7 +11,7 @@ export function Kanban() {
     return (
         <div id='kanban-main-container'>
             <div id='kanban-main-container-header-text'>
-            <Header />
+                <Header />
                 <h1>Kanban</h1>
             </div>
             <div id='kanban-project-board-container'>

@@ -8,7 +8,7 @@
     padding-right: 50px;
     display: flex;
     flex-direction: column;
-    gap:3rem;
+    gap: 3rem;
 }
 
 #dashboard-main-right {
@@ -62,7 +62,7 @@
     gap: 2rem;
     justify-content: center;
     align-items: center;
-    margin: 30px 0; 
+    margin: 30px 0;
     background-color: #F9FAFF;
     padding: 30px;
     width: 100%;
@@ -214,4 +214,56 @@
 #dash-footer {
     display: flex;
     justify-content: space-between;
+}
+
+#dashboard-piechart-container {
+    display: flex;
+}
+
+#dashboard-piechart {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    align-items: center;
+}
+
+#chart-height {
+    height: 70vh;
+}
+
+#dashboard-piechart-container {
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
+    gap: 5rem;
+}
+
+#dashboard-piechart-container-center {
+    width: 4px;
+    background-color: #8A96B1;
+}
+
+#dashboard-piechart-container-right {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding-right: 10px;
+}
+
+#dashboard-piechart-container-right-top {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+#column-charts {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+#column-charts p {
+    padding-left: 40px;
 }

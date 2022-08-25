@@ -127,7 +127,6 @@
 #bottom-message-container-main {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
 }
 
 #bottom-message-container-main-user-right>button {
