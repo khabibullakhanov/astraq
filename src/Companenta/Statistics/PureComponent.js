@@ -87,10 +87,10 @@ export function PureComponent() {
 
 
     return (
-        <ResponsiveContainer width="100%" height="90%">
+        <ResponsiveContainer width="100%" height="100%">
             <BarChart
                 width={100}
-                height={10}
+                height={100}
                 data={data}
                 margin={{
                     top: 10,

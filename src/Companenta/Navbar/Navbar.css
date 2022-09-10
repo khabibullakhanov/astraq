@@ -1,15 +1,11 @@
-.nac-link .active {
-    color: red;
+.active {
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+    padding: 10px 10px 5px 10px;
+    transition: 0.4s ease-in-out;
 }
 
 .nav-link {
     text-decoration: none;
-    display: flex;
-    gap: 1rem;
-}
-
-.nav-link img {
-    background-color: #5149E4;
 }
 
 .sidebar-container {
@@ -25,7 +21,7 @@
 .sidebar-container-inside {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 2rem;
 }
 
 .logo-container {
@@ -44,24 +40,22 @@
     color: black;
 }
 
-
-#main-part-img {
+.main-part {
     display: flex;
     align-items: center;
     gap: 1.2rem;
     text-decoration: none;
     padding-bottom: 5px;
-    /* background-color: #ECEFF7; */
-    padding: 15px 15px;
 }
 
-#main-part-img>img {
-    width: 22px;
-    height: 22px;
+#main-part-img {
     background-color: #ECEFF7;
-    width: 50px;
-    padding: 12px;
-    height: 50px;
+    padding: 12px 15px;
+}
+
+#main-part-img img {
+    width: 20px;
+    height: 20px;
 }
 
 #navbar-text {
@@ -71,4 +65,3 @@
     line-height: 22px;
     color: #8A96B1;
 }
-

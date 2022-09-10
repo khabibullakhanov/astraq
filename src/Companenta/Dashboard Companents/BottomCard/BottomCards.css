@@ -12,13 +12,18 @@
     flex-direction: column;
     padding: 30px 0;
     gap: 1.5rem;
+    max-height: 700px;
+    overflow: scroll;
 }
 
 #bottom-contact-container-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 28px 0 20px;
+    padding: 20px 30px 20px 20px;
+    position: sticky;
+    top: -30px;
+    background-color: #F9FAFF;
 }
 
 #bottom-contact-container-left {
@@ -100,6 +105,8 @@
     color: #5149E4;
     font-weight: 600;
     font-size: 18px;
+    position: sticky;
+    bottom: -30px;
 }
 
 
@@ -117,6 +124,8 @@
     flex-direction: column;
     padding: 30px 0;
     gap: 1.5rem;
+    max-height: 700px;
+    overflow: scroll;
 }
 
 #bottom-message-container-right>a {
@@ -144,6 +153,11 @@
 
 #bottom-message-container-footer {
     padding-block: 18px;
+    position: sticky;
+    bottom: -30px;
+    width: 90%;
+    margin: 0 auto;
+    background-color: #ECEFF7;
 }
 
 #bottom-message-container-footer>button {

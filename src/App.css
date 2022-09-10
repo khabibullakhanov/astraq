@@ -19,3 +19,12 @@ h1,h2,h3,h4,h5,h6 {
 .right-content {
     width: 85%;
 }
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(transparent,#8A96B1);
+    border-radius: 6px;
+}

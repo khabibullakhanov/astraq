@@ -1,39 +1,49 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import "./Contact.css"
-import todoIconImg from "../../Assets/Icons/Todo Icon.svg"
-import reactangleImg from "../../Assets/Icons/4 Tortburchaklar.svg"
+
 import { Header } from "../../Companenta/Header/Header"
 import { ContactUser } from '../../Companenta/Contact Companents/ContactUser/ContactUser'
-
+import { ContactPagination } from "../../Companenta/Contact Companents/ContactPagination"
+import greyStar from "../../Assets/Icons/Grey Star.svg"
+import bagImg from "../../Assets/Icons/Bag.svg"
+import phone from "../../Assets/Icons/Phone.svg"
+import message from "../../Assets/Icons/Message.svg"
+import { ContactData } from "../../Companenta/Data/ContactData"
+import yellowStar from "../../Assets/Icons/Yellow Star.svg"
+import { Checkbox } from "@mui/material";
 
 
 export function Contact() {
+
+    const [user, setUser] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1)
+    const [postsPerPage, setpostsPerPage] = useState(12)
+
+    useEffect(() => {
+        ContactData()
+            .then((data) => {
+                setUser(data)
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    }, [])
+
+    const lastPostIndex = currentPage * postsPerPage;
+    const firstPostIndex = lastPostIndex - postsPerPage;
+    const currentUsers = user.slice(firstPostIndex, lastPostIndex);
+
     return (
         <div id='contact-main-container'>
             <Header />
-            <div id='contact-header-part'>
-                <div>
-                    <h1>Contact</h1>
-                </div>
-                <div id="contact-header-part-right">
-                    <div id="contact-header-select-content">
-                        <select>
-                            <option>Newest</option>
-                            <option>Oldest</option>
-                            <option>More...</option>
-                        </select>
-                    </div>
-                    <div>
-                        <img src={todoIconImg} alt="" />
-                    </div>
-                    <div>
-                        <img src={reactangleImg} alt="" />
-                    </div>
-                    <button>+</button>
-                </div>
-            </div>
             <div>
-                <ContactUser />
+                <ContactUser user={currentUsers} />
+                <ContactPagination
+                    totalPosts={user.length}
+                    setCurrentPage={setCurrentPage}
+                    postsPerPage={postsPerPage}
+                    currentPage={currentPage}
+                />
             </div>
         </div>
     )

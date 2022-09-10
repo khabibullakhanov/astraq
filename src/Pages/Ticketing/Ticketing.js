@@ -27,6 +27,12 @@ export function Ticketing() {
             })
     }, [])
 
+    const [date, setDate] = useState(new Date());
+
+    const onChange = date => {
+        setDate(date);
+    }
+
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
     const d = new Date();
@@ -38,7 +44,7 @@ export function Ticketing() {
 
     const [dateState, setDateState] = useState(new Date())
     const changeDate = (e) => {
-      setDateState(e)
+        setDateState(e)
     }
 
     return (

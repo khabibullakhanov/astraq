@@ -12,8 +12,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 4.1rem;
+    gap: 5.5rem;
     width: 20%;
+    padding-top: 15px;
 }
 
 

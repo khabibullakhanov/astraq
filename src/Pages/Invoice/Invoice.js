@@ -20,6 +20,7 @@ import qizilXato from "../../Assets/Icons/Red False.svg"
 
 
 export function Invoice() {
+ 
   return (
     <div id="invoice-main-container">
       <div id="invoice-top-main-content">

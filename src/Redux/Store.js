@@ -1,9 +1,9 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import {reCrud} from "./CRUD"
+import {reMessage} from "./CRUD"
 
 
 const reducer = combineReducers({
-    crud:reCrud,
+    message:reMessage,
   });
 
 export const Store = configureStore({

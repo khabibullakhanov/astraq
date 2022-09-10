@@ -1,7 +1,7 @@
-const users = JSON.parse(localStorage.getItem("users") || "[]");
+const messages = JSON.parse(localStorage.getItem("messages") || null);
 
 
-export const reCrud = (state = users, action) => {
+export const reMessage = (state = messages, action) => {
   switch (action.type) {
     case "ADD_CRUD":
       return [...state, action.payload];
@@ -22,17 +22,17 @@ export const reCrud = (state = users, action) => {
   }
 };
 
-export const acAddCrud = (payload) => ({
+export const acAddMessage = (payload) => ({
   type: "ADD_CRUD",
   payload,
 });
 
-export const acDeleteCrud = (id) => ({
+export const acDeleteMessage = (id) => ({
   type: "DELETE_CRUD",
   payload: id,
 });
 
-export const acUpdateCrud = (payload) => ({
+export const acUpdateMessage = (payload) => ({
   type: "UPDATE_CRUD",
   payload,
 });

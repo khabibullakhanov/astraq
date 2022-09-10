@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import "./Dashboard.css";
 import dollar from "../../Assets/Icons/White Dollor.svg"
 import selectIcon from "../../Assets/Icons/Select Icon.svg"
@@ -8,14 +8,37 @@ import { PureComponent } from '../../Companenta/Statistics/PureComponent';
 import { BottomCards } from '../../Companenta/Dashboard Companents/BottomCard/BottomCards';
 import { DashboardCards } from '../../Companenta/Dashboard Companents/DashboardCard/DashboardCards';
 import { Header } from '../../Companenta/Header/Header';
-import { DashboardRightCard } from '../../Companenta/Dashboard Companents/DashboardRightCard.js/DashboardRightCard';
+import { DashboardRightCard } from '../../Companenta/Dashboard Companents/DashboardRightCard/DashboardRightCard';
 import { Persent } from '../../Companenta/Persent/Persent';
 import { DashboardActivity } from '../../Companenta/Dashboard Companents/DashboardActivity/DashboardActivity';
 import { DashboardPieChart } from '../../Companenta/Dashboard Companents/Pie Chart/DashboardPieChart';
 import pinkTolqin from "../../Assets/Images/Vector (8).png"
 import kokTolqin from "../../Assets/Images/Vector (9).png"
+import { DashboardRightUsers } from "../../Companenta/Data/DashboardRightUsers"
+import { DashboarRightCardPagination } from "../../Companenta/Dashboard Companents/DashboardRightCard/DashboarRightCardPagination"
+
 
 export function Dashboard() {
+
+    const [users, setUsers] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1)
+    const [postsPerPage, setpostsPerPage] = useState(2)
+
+    useEffect(() => {
+        DashboardRightUsers()
+            .then((data) => {
+                setUsers(data)
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    }, []);
+
+
+    const lastPostIndex = currentPage * postsPerPage;
+    const firstPostIndex = lastPostIndex - postsPerPage;
+    const currentUsers = users.slice(firstPostIndex, lastPostIndex);
+
     return (
         <div id='dashboard-main'>
             <div id='dashboard-main-left'>
@@ -130,15 +153,18 @@ export function Dashboard() {
                 </div>
                 <div>
                     <BottomCards />
-                    {/* <BottomCard /> */}
                 </div>
             </div>
             <div id='dashboard-main-right'>
                 <Persent />
                 <h1>User Reviews</h1>
-                <DashboardRightCard />
-                <DashboardRightCard />
-                <DashboardRightCard />
+                <DashboardRightCard users={currentUsers} />
+                <DashboarRightCardPagination
+                    totalPosts={users.length}
+                    setCurrentPage={setCurrentPage}
+                    postsPerPage={postsPerPage}
+                    currentPage={currentPage}
+                />
                 <h1>Recent Activity</h1>
                 <DashboardActivity />
             </div>

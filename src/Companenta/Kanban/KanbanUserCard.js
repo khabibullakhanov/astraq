@@ -52,15 +52,11 @@ export function KanbanUserCard() {
                                 <p>Progress</p>
                                 <p>{item.progressLength}</p>
                             </div>
-                            {/* {data.map((color, index) => {
-                                return ( */}
                                     <div className="w3-light-grey w3-round-xlarge">
                                         <div className="w3-container w3-round-xlarge" style={{
                                             backgroundColor: colors, width: width, paddingBlock: "6px",
                                         }}></div>
                                     </div>
-                                {/* )
-                            })} */}
                             <div id='kanbar-user-card-content-right-icons'>
                                 <img src={team} alt="" />
                                 <p>{item.team}</p>
