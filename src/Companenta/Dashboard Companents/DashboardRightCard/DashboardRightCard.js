@@ -4,6 +4,9 @@ import star from "../../../Assets/Icons/Alone Star.svg"
 import Greystar from "../../../Assets/Icons/Alone Grey Star.svg"
 import { DashboardRightUsers } from "../../Data/DashboardRightUsers"
 import { useSnackbar } from 'notistack'
+import { Checkbox } from "@mui/material";
+
+
 
 export function DashboardRightCard({ users }) {
     const { enqueueSnackbar } = useSnackbar()
@@ -22,11 +25,11 @@ export function DashboardRightCard({ users }) {
                             <div id='card-container-header-text'>
                                 <h3>{user.name}</h3>
                                 <div id='card-container-header-star'>
-                                    <img src={star} alt="" />
-                                    <img src={star} alt="" />
-                                    <img src={star} alt="" />
-                                    <img src={star} alt="" />
-                                    <img src={Greystar} alt="" />
+                                    <Checkbox icon={<img src={star} />} checkedIcon={<img src={Greystar} />} />
+                                    <Checkbox icon={<img src={star} />} checkedIcon={<img src={Greystar} />} />
+                                    <Checkbox icon={<img src={star} />} checkedIcon={<img src={Greystar} />} />
+                                    <Checkbox icon={<img src={star} />} checkedIcon={<img src={Greystar} />} />
+                                    <Checkbox icon={<img src={Greystar} />} checkedIcon={<img src={star} />} />
                                 </div>
                             </div>
                         </div>
