@@ -24,7 +24,7 @@ import { acAddCrud, acDeleteCrud, acUpdateCrud } from "../../Redux/CRUD";
 import { acLoading } from "../../Redux/Loading";
 import { IconButton } from '@mui/material'
 import EditIcon from '@mui/icons-material/Edit';
-
+//  salom mastura 
 
 export function Banking() {
     const dispatch = useDispatch();
