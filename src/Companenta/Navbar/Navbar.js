@@ -9,17 +9,19 @@ import Javon from "../../Assets/Icons/Javon.svg"
 import List from "../../Assets/Icons/List.svg"
 import Hamyon from "../../Assets/Icons/Hamyon.svg"
 import CreditCard from "../../Assets/Icons/25-credit card.svg"
-import { NavLink } from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
 
 
 
 export function Navbar() {
     return (
         <div className='sidebar-container'>
-            <div className='logo-container'>
-                <img src={mainLogo} alt="" />
-                <p>Astraq</p>
-            </div>
+            <Link className="nav-linkkk" to="/">
+                <div className='logo-container'>
+                    <img src={mainLogo} alt="" />
+                    <p>Astraq</p>
+                </div>
+            </Link>
             <div className="sidebar-container-inside">
                 <NavLink className="nav-link" activeclassname="active" to="/">
                     <div className='main-part'>

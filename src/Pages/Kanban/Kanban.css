@@ -30,7 +30,7 @@
 
 #kanban-star-content {
     background-color: #ECEFF7;
-    padding: 10px 14px 5px 14px;
+    padding: 1px 15px 10px 3px;
 }
 
 #kanban-star-content>button {
@@ -39,9 +39,9 @@
     border: none;
 }
 
-#kanban-star-content>button>* {
-    width: 20px;
-    height: 20px;
+#kanban-star-content>* {
+    width: 25px;
+    height: 25px;
 }
 
 #kanban-grey-div-container {
@@ -126,4 +126,16 @@
 
 #kanban-project-board-container-right > button > span {
     font-size: 18px;
+}
+
+#kanban-save-content {
+    background-color: rgb(34, 172, 34);
+    padding: 8px 15px;
+}
+
+#kanban-save-content > button {
+    background: none;
+    outline: none;
+    color: white;
+    border: none;
 }

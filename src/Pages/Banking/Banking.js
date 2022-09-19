@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import "./Banking.css"
 import { Header } from "../../Companenta/Header/Header"
 import kokSt from "../../Assets/Images/Blue Statistics Banking.png"
@@ -14,32 +14,94 @@ import { BankingPagination } from '../../Companenta/BankingBottomCard/BankingPag
 import creditCard from "../../Assets/Images/Credit Card.png"
 import sendImg from "../../Assets/Icons/Send Logo.svg"
 import blueRectangle from "../../Assets/Icons/Siyohrang Tortburchak.svg"
-import pinkRectangle from "../../Assets/Icons/Pushti Tortburchak.svg"
-import orangeRectangle from "../../Assets/Icons/Orange Tortburchak.svg"
 import uchNuqta from "../../Assets/Icons/3 nuqta.svg"
+import malumotlar from "./BankinfUsers.txt"
+import TextField from '@mui/material/TextField';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { useSnackbar } from 'notistack'
+import { useDispatch, useSelector } from "react-redux";
+import { acAddCrud, acDeleteCrud, acUpdateCrud } from "../../Redux/CRUD";
+import { acLoading } from "../../Redux/Loading";
+import { IconButton } from '@mui/material'
+import EditIcon from '@mui/icons-material/Edit';
 
 
 export function Banking() {
+    const dispatch = useDispatch();
+    const bankingUsers = useSelector((state) => state.crud);
 
-    const [user, setUser] = useState([]);
+    const { enqueueSnackbar } = useSnackbar()
+    const [users, setUsers] = useState([]);
     const [currentPage, setCurrentPage] = useState(1)
-    const [postsPerPage, setpostsPerPage] = useState(6)
+    const [postsPerPage, setpostsPerPage] = useState(8)
+    const [modalOpen, setModalOpen] = useState(false)
+    const [cards, setCards] = useState([])
+    const [value, setValue] = useState([])
+    const [typeHendelSubmit, setTypeHendelSubmit] = useState("Add");
+
     useEffect(() => {
         BnkingData()
             .then((data) => {
-                setUser(data)
+                setUsers(data)
             })
             .catch((err) => {
                 console.log(err);
             })
     }, [])
+    useEffect(() => {
+        localStorage.setItem("users", JSON.stringify(bankingUsers));
+    }, [bankingUsers]);
 
     const lastPostIndex = currentPage * postsPerPage;
     const firstPostIndex = lastPostIndex - postsPerPage;
-    const currentUsers = user.slice(firstPostIndex, lastPostIndex);
+    const currentUsers = users.slice(firstPostIndex, lastPostIndex);
 
+    const cart = JSON.parse(localStorage.getItem("yangiCardlar") || "[]")
+    localStorage.setItem("yangiCardlarLength", JSON.stringify(users.length))
+    const submitCards = (e) => {
+        e.preventDefault();
+        setTimeout(() => {
+            dispatch(acLoading(true));
+        }, "1")
+        setTimeout(() => {
+            dispatch(acLoading(false));
+        }, "1500")
+        if (typeHendelSubmit === "Add") {
+            setModalOpen(false)
+            const NowDate = new Date().getTime()
+            const newBankingUser = {
+                id: NowDate,
+                bankingUserName: e.target.name.value,
+                bankingMoney: e.target.money.value,
+            };
+            dispatch(acAddCrud(newBankingUser))
+            enqueueSnackbar(`${value.name} successfully added`, {
+                autoHideDuration: "2000",
+                variant: "success",
+            });
+        } else {
+            dispatch(acUpdateCrud(value));
+            setTypeHendelSubmit("Add")
+            setModalOpen(false);
+            setTimeout(() => {
+                dispatch(acLoading(true));
+            }, "1")
+            setTimeout(() => {
+                dispatch(acLoading(false));
+            }, "1500")
+            enqueueSnackbar(`${value.bankingUserName} successfully edited`, {
+                autoHideDuration: "2000",
+                variant: "success",
+            });
+        }
 
-    // const paginate = (pageNumber) => setCurrentPage(pageNumber)
+        enqueueSnackbar("User successfully added", {
+            autoHideDuration: "2000",
+            variant: "success",
+        });
+        setValue({ bankingUserName: "", bankingMoney: "" })
+    }
+
     return (
         <div id="banking-main-container">
             <div id='banking-main-container-left'>
@@ -114,14 +176,16 @@ export function Banking() {
                                     <img src={printer} alt="" />
                                 </div>
                                 <div id='border-grey'>
-                                    <img src={download} alt="" />
+                                    <a href={malumotlar} download={malumotlar}>
+                                        <img src={download} alt="" />
+                                    </a>
                                 </div>
                             </div>
                         </div>
                         <div id='banking-main-container-left-main-bottom-main'>
                             <BankingCard users={currentUsers} />
                             <BankingPagination
-                                totalPosts={user.length}
+                                totalPosts={users.length}
                                 setCurrentPage={setCurrentPage}
                                 postsPerPage={postsPerPage}
                                 currentPage={currentPage}
@@ -141,33 +205,59 @@ export function Banking() {
                         <h2 id="banking-right-container-text">Quick Transfer</h2>
                         <div id='banking-main-container-right-transfer-container-inside'>
                             <div id='banking-main-container-right-transfer-container-inside-divs-container'>
-                                <div id='banking-right-grey-div'>
-                                    <div id="banking-right-grey-background"></div>
-                                    <h6 id='font-weight-600'>Tony</h6>
-                                </div>
-                                <div id='banking-right-grey-div'>
-                                    <div id='banking-right-grey-background'></div>
-                                    <h6 id='font-weight-600'>Karen</h6>
-                                </div>
-                                <div id='banking-right-grey-div'>
-                                    <div id="banking-right-grey-background"></div>
-                                    <h6 id='font-weight-600'>Jordan</h6>
-                                </div>
-                                <div id='banking-right-grey-div'>
-                                    <div id="banking-right-grey-background"></div>
-                                    <h6 id='font-weight-600'>Ken</h6>
-                                </div>
-                                <div id='banking-right-grey-div'>
-                                    <div id="banking-right-grey-background"></div>
-                                    <h6 id='font-weight-600'>Jack</h6>
-                                </div>
+                                {
+                                    bankingUsers.map((item, index) => {
+                                        return (
+                                            <div id='banking-right-grey-div'>
+
+                                                <div id='banking-right-grey-background'>
+                                                </div>
+                                                <div style={{ textAlign: "center" }}>
+                                                    <h6 id='font-weight-600'>{item.bankingUserName}</h6>
+                                                    <IconButton id='bankingEdite' onClick={() => {
+                                                        setValue(item)
+                                                        setModalOpen(true);
+                                                        setTypeHendelSubmit("Edit");
+                                                    }}>
+                                                        <EditIcon />
+                                                    </IconButton>
+                                                    <IconButton id='bankingDelete' onClick={() => {
+                                                        dispatch(acDeleteCrud(item.id))
+                                                        enqueueSnackbar(`${item.bankingUserName} successfully deleted`, {
+                                                            autoHideDuration: "2000",
+                                                            variant: "success",
+                                                        });
+                                                    }} >
+                                                        <DeleteIcon id="bankingEdite" />
+                                                    </IconButton>
+                                                </div>
+                                            </div>
+                                        )
+                                    })
+                                }
+
                                 <div id='bankingright-blue-button-div'>
-                                    <button>+</button>
+                                    <button onClick={() => { setModalOpen(true) }}>+</button>
+                                </div>
+                                <div id='message-modal-container' style={modalOpen ? { display: "block", textAlign: "center" } : { display: "none" }}>
+                                    <div id='dash-contact-container-inside'>
+                                        <div id='dash-contact-container-inside-header'>
+                                            <h1 id="dash-contact-modal-form-h1">Add User</h1>
+                                            <h2 onClick={() => { setModalOpen(false) }}>X</h2>
+                                        </div>
+                                        <form id='dash-contact-modal-form' onSubmit={submitCards}>
+                                            <TextField required name='name' value={value.bankingUserName} label="Type name..." variant="outlined" onChange={(e) => { setValue({ ...value, bankingUserName: e.target.value }) }} placeholder="Contact name..." />
+                                            <TextField required name='money' value={value.bankingMoney} label="Type amount..." variant="outlined" onChange={(e) => { setValue({ ...value, bankingMoney: e.target.value }) }} placeholder="Type amount..." />
+                                            <button type='submit'>
+                                                {typeHendelSubmit}
+                                            </button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                             <div id='banking-main-container-right-amount-container'>
                                 <p id='grey-color'>Amount</p>
-                                <input id='font-weight-600' type="text" value="$100" />
+                                <input id='font-weight-600' type="number" value={value.bankingMoney} />
                             </div>
                             <button id="banking-right-transfer-comtainer-send">Transfer <img src={sendImg} /></button>
                         </div>

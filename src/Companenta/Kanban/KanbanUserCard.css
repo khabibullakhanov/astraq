@@ -10,7 +10,7 @@
     width: 23.5%;
     background-color: #F9FAFF;
     padding: 0 40px;
-    height: 260px;
+    height: 270px;
     margin-bottom: 50px;
 }
 
@@ -48,6 +48,15 @@
     display: flex;
     gap: 1rem;
     padding-top: 30px;
+}
+
+#kanbar-user-card-content-right > h2 {
+    float: right;
+    font-size: 25px;
+    font-weight: 600;
+}
+#kanbar-user-card-content-right > h2> * {
+    font-size: 20px;
 }
 
 #kanbar-user-card-content-right-icons p {

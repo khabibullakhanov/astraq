@@ -9,12 +9,6 @@
     display: flex;
     flex-direction: column;
     gap: 3rem;
-    height: auto;
-    /* padding-right: 50px;
-    display: flex;
-    flex-direction: column;
-    gap: 3rem;
-    height: auto; */
 }
 
 #dashboard-main-right {
@@ -32,7 +26,6 @@
 #dashboard-text {
     /* margin: 40px 0; */
 }
-
 
 #activity {
     display: flex;
@@ -234,9 +227,13 @@
     align-items: center;
 }
 
+#chart-height {
+    height: 70vh;
+}
 
 #dashboard-piechart-container {
     display: flex;
+    /* align-items: center; */
     justify-content: center;
     gap: 5rem;
 }

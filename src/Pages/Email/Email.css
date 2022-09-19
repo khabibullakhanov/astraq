@@ -127,7 +127,7 @@
 
 #email-main-container-left-inside-right-card-item-left {
     background-color: #8A96B1;
-    width: 12%;
+    width: 75px;
     height: 45px;
     margin-top: 10px;
 }
@@ -141,6 +141,7 @@
     align-items: flex-end;
     flex-direction: column;
     justify-content: space-between;
+    width: 30%;
 }
 
 #email-main-container-left-inside-right-card-item-right-bottom-inside {
@@ -341,4 +342,11 @@
 #email-main-container-right-color-container-bottom > img {
     width: 20px;
     height: 20px;
+}
+
+#email-xabar-div {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 4rem;
 }

@@ -17,10 +17,11 @@ import soroqIcon from "../../Assets/Icons/Soroq.svg"
 import purpleTrue from "../../Assets/Icons/Purple True.svg"
 import uchNuqta from "../../Assets/Icons/3 nuqta.svg"
 import qizilXato from "../../Assets/Icons/Red False.svg"
+import { Checkbox } from "@mui/material";
 
 
 export function Invoice() {
- 
+
   return (
     <div id="invoice-main-container">
       <div id="invoice-top-main-content">
@@ -129,7 +130,7 @@ export function Invoice() {
               <div id="invoice-blue-div-bootom-right-first">
                 <div id="invoice-blue-div-bootom-right-first-left">
                   <div id="invoice-blue-bottom-border">
-                    <img src={doubleTrue} alt="" />
+                    <Checkbox icon={<img src={doubleTrue} />} checkedIcon={<img src={trueIcon} style={{ width: "24px" }} />} />
                   </div>
                   <div id="invoie-blue-bottom-text">
                     <p>Invoice Completed </p>
@@ -143,7 +144,7 @@ export function Invoice() {
               <div id="invoice-blue-div-bootom-right-second">
                 <div id="invoice-blue-div-bootom-right-second-left">
                   <div id="invoice-blue-bottom-border">
-                    <img src={trueIcon} alt="" />
+                    <Checkbox icon={<img src={doubleTrue} />} checkedIcon={<img src={trueIcon} style={{ width: "24px" }} />} />
                   </div>
                   <div id="invoie-blue-bottom-text">
                     <p>Invoice Sent</p>
@@ -157,7 +158,7 @@ export function Invoice() {
               <div id="invoice-blue-div-bootom-right-third">
                 <div id="invoice-blue-div-bootom-right-third-left">
                   <div id="invoice-blue-bottom-border">
-                    <img src={undovIcon} alt="" />
+                    <Checkbox icon={<img src={undovIcon} style={{ width: "24px" }} />} checkedIcon={<img src={trueIcon} style={{ width: "24px" }} />} />
                   </div>
                   <div id="invoie-blue-bottom-text">
                     <p>Invoice Pending</p>
@@ -171,7 +172,7 @@ export function Invoice() {
               <div id="invoice-blue-div-bootom-right-fourth">
                 <div id="invoice-blue-div-bootom-right-fourth-left">
                   <div id="invoice-blue-bottom-border">
-                    <img src={soroqIcon} alt="" />
+                    <Checkbox icon={<img src={soroqIcon} style={{ fontSize: "40px" }} />} checkedIcon={<img src={trueIcon} style={{ width: "24px" }} />} />
                   </div>
                   <div id="invoie-blue-bottom-text">
                     <p>Invoice Unpaid</p>
@@ -196,10 +197,17 @@ export function Invoice() {
                 <h3>#123456</h3>
                 <p>21/03/2021</p>
               </div>
-              <div id="invoice-bottom-main-content-right-main-first-center">
+              <Checkbox icon={
+                <div id="invoice-bottom-main-content-right-main-first-center-red">
+                  <img src={qizilXato} alt="" />
+                  Paid
+                </div>
+
+              } checkedIcon={<div id="invoice-bottom-main-content-right-main-first-center">
                 <img src={purpleTrue} alt="" />
                 Paid
-              </div>
+              </div>} />
+
               <div>
                 <img src={uchNuqta} alt="" />
               </div>
@@ -209,23 +217,13 @@ export function Invoice() {
                 <h3>#123456</h3>
                 <p>21/03/2021</p>
               </div>
-              <div id="invoice-bottom-main-content-right-main-first-center-red">
-                <img src={qizilXato} alt="" />
-                Paid
-              </div>
-              <div>
-                <img src={uchNuqta} alt="" />
-              </div>
-            </div>
-            <div id="invoice-bottom-main-content-right-main-first">
-              <div id="invoice-bottom-main-content-right-main-first-left">
-                <h3>#123456</h3>
-                <p>21/03/2021</p>
-              </div>
-              <div id="invoice-bottom-main-content-right-main-first-center">
+              <Checkbox icon={<div id="invoice-bottom-main-content-right-main-first-center">
                 <img src={purpleTrue} alt="" />
                 Paid
-              </div>
+              </div>} checkedIcon={<div id="invoice-bottom-main-content-right-main-first-center-red">
+                <img src={qizilXato} alt="" />
+                Paid
+              </div>} />
               <div>
                 <img src={uchNuqta} alt="" />
               </div>
@@ -235,10 +233,16 @@ export function Invoice() {
                 <h3>#123456</h3>
                 <p>21/03/2021</p>
               </div>
-              <div id="invoice-bottom-main-content-right-main-first-center-red">
-                <img src={qizilXato} alt="" />
+              <Checkbox icon={
+                <div id="invoice-bottom-main-content-right-main-first-center-red">
+                  <img src={qizilXato} alt="" />
+                  Paid
+                </div>
+
+              } checkedIcon={<div id="invoice-bottom-main-content-right-main-first-center">
+                <img src={purpleTrue} alt="" />
                 Paid
-              </div>
+              </div>} />
               <div>
                 <img src={uchNuqta} alt="" />
               </div>
@@ -248,10 +252,32 @@ export function Invoice() {
                 <h3>#123456</h3>
                 <p>21/03/2021</p>
               </div>
-              <div id="invoice-bottom-main-content-right-main-first-center-red">
+              <Checkbox icon={
+                <div id="invoice-bottom-main-content-right-main-first-center-red">
+                  <img src={qizilXato} alt="" />
+                  Paid
+                </div>
+
+              } checkedIcon={<div id="invoice-bottom-main-content-right-main-first-center">
+                <img src={purpleTrue} alt="" />
+                Paid
+              </div>} />
+              <div>
+                <img src={uchNuqta} alt="" />
+              </div>
+            </div>
+            <div id="invoice-bottom-main-content-right-main-first">
+              <div id="invoice-bottom-main-content-right-main-first-left">
+                <h3>#123456</h3>
+                <p>21/03/2021</p>
+              </div>
+              <Checkbox icon={<div id="invoice-bottom-main-content-right-main-first-center">
+                <img src={purpleTrue} alt="" />
+                Paid
+              </div>} checkedIcon={<div id="invoice-bottom-main-content-right-main-first-center-red">
                 <img src={qizilXato} alt="" />
                 Paid
-              </div>
+              </div>} />
               <div>
                 <img src={uchNuqta} alt="" />
               </div>

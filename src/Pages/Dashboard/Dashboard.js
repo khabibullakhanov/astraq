@@ -66,10 +66,7 @@ export function Dashboard() {
                         </div>
                     </div>
                 </div>
-                <div>
-                    <PureComponent id="dash-chart-main" />
-                </div>
-
+                <PureComponent id="chart-height" />
                 <div id="dashboard-piechart-container">
                     <div id="dashboard-piechart">
                         <div id="column-charts">

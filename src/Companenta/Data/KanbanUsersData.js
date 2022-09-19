@@ -7,7 +7,7 @@ export const KanbanUsersData = async () => {
             team: "3",
             skripka: "7",
             message: "5",
-            progressLength: "97%",
+            progressLength: "97",
             color: "#5149E4"
         },
         {
@@ -17,7 +17,7 @@ export const KanbanUsersData = async () => {
             team: "2",
             skripka: "6",
             message: "9",
-            progressLength: "23%",
+            progressLength: "23",
             color: "#FFB9CD"
         },
         {
@@ -27,7 +27,7 @@ export const KanbanUsersData = async () => {
             team: "5",
             skripka: "2",
             message: "8",
-            progressLength: "84%",
+            progressLength: "84",
             color: "#B9EEFF"
         },
         {
@@ -37,7 +37,7 @@ export const KanbanUsersData = async () => {
             team: "4",
             skripka: "7",
             message: "1",
-            progressLength: "49%",
+            progressLength: "49",
             color: "#F4E131"
         },
         {
@@ -47,7 +47,7 @@ export const KanbanUsersData = async () => {
             team: "2",
             skripka: "9",
             message: "3",
-            progressLength: "75%",
+            progressLength: "75",
             color: "#FF5B5B"
         },
         {
@@ -57,7 +57,7 @@ export const KanbanUsersData = async () => {
             team: "5",
             skripka: "2",
             message: "9",
-            progressLength: "38%",
+            progressLength: "38",
             color: "#00A389"
         },
         {
@@ -67,7 +67,7 @@ export const KanbanUsersData = async () => {
             team: "2",
             skripka: "7",
             message: "7",
-            progressLength: "57%",
+            progressLength: "57",
             color: "#5149E4"
         },
         {
@@ -77,7 +77,7 @@ export const KanbanUsersData = async () => {
             team: "7",
             skripka: "2",
             message: "5",
-            progressLength: "27%",
+            progressLength: "27",
             color: "#0A0603"
         },
         {
@@ -87,7 +87,7 @@ export const KanbanUsersData = async () => {
             team: "1",
             skripka: "8",
             message: "3",
-            progressLength: "67%",
+            progressLength: "67",
             color: "#A18594"
         },
         {
@@ -97,8 +97,8 @@ export const KanbanUsersData = async () => {
             team: "2",
             skripka: "5",
             message: "9",
-            progressLength: "82%",
-            color: "#F4F4F4"
+            progressLength: "82",
+            color: "#F4F4"
         },
         {
             id: 11,
@@ -107,7 +107,7 @@ export const KanbanUsersData = async () => {
             team: "9",
             skripka: "3",
             message: "7",
-            progressLength: "43%",
+            progressLength: "43",
             color: "#2271B3"
         },
         {
@@ -117,7 +117,7 @@ export const KanbanUsersData = async () => {
             team: "1",
             skripka: "3",
             message: "7",
-            progressLength: "92%",
+            progressLength: "92",
             color: "#49678D"
         },
     ]

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import "./Email.css"
 import { Header } from "../../Companenta/Header/Header"
 import { NavLink } from 'react-router-dom'
@@ -38,12 +38,22 @@ import uchNuqta from "../../Assets/Icons/3 nuqta.svg"
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 import yellowStar from "../../Assets/Icons/Yellow Star.svg"
 import { Checkbox } from "@mui/material";
-
-
+import AddIcon from '@mui/icons-material/Add';
+import TextField from '@mui/material/TextField';
+import greyStar from "../../Assets/Icons/Grey Star.svg"
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { useDispatch, useSelector } from "react-redux";
+import { acAddCrud, acDeleteCrud, acUpdateCrud } from "../../Redux/CRUD";
+import { useSnackbar } from 'notistack'
+import { acLoading } from '../../Redux/Loading'
 
 
 export function Email() {
-
+    const emailUsers = useSelector((state) => state.crud);
+    const emailMessages = useSelector((state) => state.crud);
+    const dispatch = useDispatch();
+    const { enqueueSnackbar } = useSnackbar()
     const [user, setUser] = useState([]);
     const [currentPage, setCurrentPage] = useState(1)
     const [postsPerPage, setpostsPerPage] = useState(5)
@@ -55,24 +65,102 @@ export function Email() {
     const [alignCenter, setAlignCenter] = useState(false)
     const [alignRight, setAlignRight] = useState(false)
     const [deleteItem, setDeleteItem] = useState(false)
+    const [message, setMessage] = useState([])
+    const [modalOpen, setModalOpen] = useState(false)
+    const [newContact, setNewContact] = useState([])
+    const [value, setValue] = useState([])
+    const [typeHendelSubmit, setTypeHendelSubmit] = useState("Add");
 
+    const submitXabar = (e) => {
+        e.preventDefault();
+
+        const hozir = new Date().getTime()
+        const newEmailMessages = {
+            newEmailMessagesId: hozir,
+            emailLeftMes: e.target.mes.value,
+        };
+        setValue({ emailLeftMes: "" })
+
+        dispatch(acAddCrud(newEmailMessages))
+    }
 
     useEffect(() => {
-        EmailUsers()
-            .then((data) => {
-                setUser(data)
-            })
-            .catch((err) => {
-                console.log(err);
-            })
-    }, [])
+        localStorage.setItem("users", JSON.stringify(emailUsers));
+    }, [emailUsers]);
+
+    useEffect(() => {
+        localStorage.setItem("users", JSON.stringify(emailMessages));
+    }, [emailMessages]);
+
+    const handleSelect = () => {
+
+    }
 
     const lastPostIndex = currentPage * postsPerPage;
     const firstPostIndex = lastPostIndex - postsPerPage;
     const currentUsers = user.slice(firstPostIndex, lastPostIndex);
 
+
+    const addNewContact = (e) => {
+        e.preventDefault();
+        setTimeout(() => {
+            dispatch(acLoading(true));
+        }, "1")
+        setTimeout(() => {
+            dispatch(acLoading(false));
+        }, "1500")
+        if (typeHendelSubmit === "Add") {
+            setModalOpen(false)
+            const hoz = new Date().getTime()
+            const newEmailContacts = {
+                newEmailContactsId: hoz,
+                emailContactName: e.target.name.value,
+                emailContactJob: e.target.job.value,
+            };
+
+            dispatch(acAddCrud(newEmailContacts))
+            enqueueSnackbar(`${value.emailContactName} successfully added`, {
+                autoHideDuration: "2000",
+                variant: "success",
+            });
+        } else {
+            dispatch(acUpdateCrud(value));
+            setTypeHendelSubmit("Add")
+            setModalOpen(false);
+            setTimeout(() => {
+                dispatch(acLoading(true));
+            }, "1")
+            setTimeout(() => {
+                dispatch(acLoading(false));
+            }, "1500")
+            enqueueSnackbar(`${value.emailContactName} successfully edited`, {
+                autoHideDuration: "2000",
+                variant: "success",
+            });
+        }
+        setValue({ emailContactName: "", emailContactJob: "", })
+
+    }
+    const y = new Date()
+    const hour = y.getMinutes()
+
     return (
         <div id='email-main-container'>
+            <div id='message-modal-container' style={modalOpen ? { display: "block", textAlign: "center" } : { display: "none" }}>
+                <div id='dash-contact-container-inside'>
+                    <div id='dash-contact-container-inside-header'>
+                        <h1 id="dash-contact-modal-form-h1">Add Contact</h1>
+                        <h2 onClick={() => { setModalOpen(false) }}>X</h2>
+                    </div>
+                    <form id='dash-contact-modal-form' onSubmit={addNewContact}>
+                        <TextField required value={value.emailContactName} label="Type name..." name='name' variant="outlined" onChange={(e) => { setValue({ ...value, emailContactName: e.target.value }) }} placeholder="Contact name..." />
+                        <TextField required value={value.emailContactJob} label="Type job..." name='job' variant="outlined" onChange={(e) => { setValue({ ...value, emailContactJob: e.target.value }) }} placeholder="Contact job..." />
+                        <button type='submit'>
+                            {typeHendelSubmit}
+                        </button>
+                    </form>
+                </div>
+            </div>
             <div id='email-main-container-left'>
                 <div>
                     <Header />
@@ -82,7 +170,7 @@ export function Email() {
                 </div>
                 <div id='email-main-container-left-inside'>
                     <div id='email-main-container-left-inside-left'>
-                        <button id='email-main-container-left-inside-left-header-button'>+ New Mail</button>
+                        <button id='email-main-container-left-inside-left-header-button' onClick={() => { setModalOpen(true) }}>+ New Mail</button>
                         <div id='email-main-container-left-inside-left-nav'>
                             <NavLink activeclassname="email-nav" id='email-navbar-item' to="/email">
                                 <img src={galarey} alt="" />
@@ -108,7 +196,7 @@ export function Email() {
                                 <img src={clock} alt="" />
                                 <p>Inbox</p>
                             </NavLink>
-                            <select id='email-main-container-left-inside-left-select'>
+                            <select onClick={handleSelect} id='email-main-container-left-inside-left-select'>
                                 <option>Info</option>
                                 <option>Few</option>
                                 <option>More</option>
@@ -146,15 +234,45 @@ export function Email() {
                             </div>
                         </div>
                         <div id="email-main-container-left-inside-right-userlar">
-                            <EmailItem
-                                users={currentUsers}
-                            />
-                            <EmailPagination
-                                totalPosts={user.length}
+                            <div id='emailItem-main-container'>
+                                {emailUsers.map((item, index) => {
+                                    return (
+                                        <div id='email-main-container-left-inside-right-card-item'>
+                                            <div id='email-main-container-left-inside-right-card-item-left'></div>
+                                            <div id='email-main-container-left-inside-right-card-item-right'>
+                                                <div>
+                                                    <h3 id='font-weight-600'>{item.emailContactName}</h3>
+                                                    <p id='email-main-container-left-inside-right-card-item-right-text'>{item.emailContactJob}</p>
+                                                </div>
+                                                <div id='email-main-container-left-inside-right-card-item-right-bottom'>
+                                                    <p id='grey-color'>{hour} min ago</p>
+                                                    <div id='email-main-container-left-inside-right-card-item-right-bottom-inside'>
+                                                        <Checkbox icon={<img src={greyStar} />} checkedIcon={<img src={yellowStar} />} />
+                                                        <DeleteIcon style={{ color: "grey" }} onClick={() => {
+                                                            dispatch(acDeleteCrud(item.newEmailContactsId))
+                                                            enqueueSnackbar(`${item.emailContactName} successfully deleted`, {
+                                                                autoHideDuration: "2000",
+                                                                variant: "success",
+                                                            });
+                                                        }} />
+                                                        <EditIcon style={{ color: "grey" }} onClick={() => {
+                                                            setValue(item)
+                                                            setModalOpen(true)
+                                                            setTypeHendelSubmit("Edit");
+                                                        }} />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )
+                                })}
+                            </div>
+                            {/* <EmailPagination
+                                totalPosts={emailUsers.length}
                                 setCurrentPage={setCurrentPage}
                                 postsPerPage={postsPerPage}
                                 currentPage={currentPage}
-                            />
+                            /> */}
                         </div>
                     </div>
                 </div>
@@ -208,7 +326,7 @@ export function Email() {
                     <div id='email-main-container-right-color-container'>
                         <div id='email-main-container-right-color-container-left'>
                             <div id='email-main-container-right-color-container-grey'>
-                                <img src={imgEmail.leftImg.size ? URL.createObjectURL(imgEmail.leftImg) : { skripka }} alt="No file chosen" />
+                                <img src={imgEmail.leftImg.size ? URL.createObjectURL(imgEmail.leftImg) : <AddIcon />} />
                             </div>
                             <div id='email-main-container-right-color-container-bottom'>
                                 <label>
@@ -220,7 +338,7 @@ export function Email() {
                         </div>
                         <div id='email-main-container-right-color-container-left'>
                             <div id='email-main-container-right-color-container-grey'>
-                                <img src={imgEmail.rightImg.size ? URL.createObjectURL(imgEmail.rightImg) : { skripka }} alt="No file chosen" />
+                                <img src={imgEmail.rightImg.size ? URL.createObjectURL(imgEmail.rightImg) : <AddIcon />} />
                             </div>
                             <div id='email-main-container-right-color-container-bottom'>
                                 <label>
@@ -231,35 +349,44 @@ export function Email() {
                             </div>
                         </div>
                     </div>
-                    <div id='email-main-container-right-message-container'>
-                        <input type="text" style={alignCenter ? { textAlign: 'center' } : { textAlign: "left" }} />
-                        <div id='email-main-container-right-message-container-bottom'>
-                            <div id='email-main-container-right-message-container-bottom-left'>
-                                <img src={betta} alt="" />
-                                <img src={yonlaganI} alt="" />
-                                <img src={underLine} alt="" />
-                                <img src={tLogo} alt="" />
+                    {emailMessages.map((item, index) => {
+                        return (
+                            <div id="email-xabar-div">
+                                <h6>{item.emailLeftMes}</h6>
                             </div>
-                            <div id='email-main-container-right-message-container-bottom-right'>
-                                <FormatAlignLeftIcon style={{ color: "#8A96B1" }} onClick={() => { setAlignLeft(true) }} />
-                                <FormatAlignCenterIcon style={{ color: "#8A96B1" }} onClick={() => { setAlignCenter(true) }} />
-                                <FormatAlignRightIcon style={{ color: "#8A96B1" }} onClick={() => { setAlignRight(true) }} />
+                        )
+                    })}
+                    <form onSubmit={submitXabar}>
+                        <div id='email-main-container-right-message-container'>
+                            <input name='mes' value={value.emailLeftMes} type="text" onChange={(e) => { setValue({ ...value, emailLeftMes: e.target.value }) }} />
+                            <div id='email-main-container-right-message-container-bottom'>
+                                <div id='email-main-container-right-message-container-bottom-left'>
+                                    <img src={betta} alt="" />
+                                    <img src={yonlaganI} alt="" />
+                                    <img src={underLine} alt="" />
+                                    <img src={tLogo} alt="" />
+                                </div>
+                                <div id='email-main-container-right-message-container-bottom-right'>
+                                    <FormatAlignLeftIcon style={{ color: "#8A96B1" }} onClick={() => { setAlignLeft(true) }} />
+                                    <FormatAlignCenterIcon style={{ color: "#8A96B1" }} onClick={() => { setAlignCenter(true) }} />
+                                    <FormatAlignRightIcon style={{ color: "#8A96B1" }} onClick={() => { setAlignRight(true) }} />
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div id='email-main-container-right-message-bottom'>
-                        <div id='email-main-container-right-message-bottom-left'>
-                            <img src={skripka} alt="" />
-                            <img src={galareya} alt="" />
-                            <img src={uchNuqta} alt="" />
+                        <div id='email-main-container-right-message-bottom'>
+                            <div id='email-main-container-right-message-bottom-left'>
+                                <img src={skripka} alt="" />
+                                <img src={galareya} alt="" />
+                                <img src={uchNuqta} alt="" />
+                            </div>
+                            <div id='email-main-container-right-message-bottom-right'>
+                                <button type='submit'>
+                                    Send
+                                </button>
+                                <img src={sendLogo} alt="" />
+                            </div>
                         </div>
-                        <div id='email-main-container-right-message-bottom-right'>
-                            <button>
-                                Send
-                            </button>
-                            <img src={sendLogo} alt="" />
-                        </div>
-                    </div>
+                    </form>
                 </div>
 
 

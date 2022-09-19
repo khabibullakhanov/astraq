@@ -7,6 +7,9 @@ import piramida from "../../../Assets/Icons/Piramida.svg"
 
 
 export function DashboardCards() {
+
+    
+
     return (
         <div>
             <div id='cards-container'>

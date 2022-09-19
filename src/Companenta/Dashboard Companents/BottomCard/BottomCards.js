@@ -1,27 +1,79 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import "./BottomCards.css"
 import message from "../../../Assets/Icons/Message.svg"
 import phone from "../../../Assets/Icons/Phone.svg"
 import doubleTrue from "../../../Assets/Icons/Pink Double True.svg"
-import { DashboardContacts } from "../../Data/DashboardContacts"
-import emailjs from "emailjs-com"
-
+// import { DashboardContacts } from "../../Data/DashboardContacts"
+import DeleteIcon from '@mui/icons-material/Delete';
+import TextField from '@mui/material/TextField';
+import { useDispatch, useSelector } from "react-redux";
+import { acAddCrud, acDeleteCrud, acUpdateCrud } from "../../../Redux/CRUD";
+import { useSnackbar } from 'notistack'
+import EditIcon from '@mui/icons-material/Edit';
+import NumberFormat from "react-number-format";
+import { acLoading } from "../../../Redux/Loading";
 
 export function BottomCards() {
 
+    const dispatch = useDispatch();
+    const dashUser = useSelector((state) => state.crud);
+    const { enqueueSnackbar } = useSnackbar()
     const [contacts, setContacts] = useState([])
-
+    const [modalOpen, setModalOpen] = useState(false)
+    const [newContact, setNewContact] = useState([])
+    const [value, setValue] = useState([])
+    const [typeHendelSubmit, setTypeHendelSubmit] = useState("Add");
     useEffect(() => {
-        DashboardContacts()
-            .then((data) => {
-                setContacts(data)
-            })
-            .catch((err) => {
-                console.log(err);
-            })
-    }, []);
+        localStorage.setItem("users", JSON.stringify(dashUser));
+    }, [dashUser]);
 
-    const contactLength = contacts.length
+
+    localStorage.setItem("yangiContactsLength", JSON.stringify(contacts.length))
+    const addNewContact = (e) => {
+        e.preventDefault();
+        setTimeout(() => {
+            dispatch(acLoading(true));
+        }, "1")
+        setTimeout(() => {
+            dispatch(acLoading(false));
+        }, "1500")
+
+            if (typeHendelSubmit === "Add") {
+                setModalOpen(false)
+                const NowDate = new Date().getTime()
+                const newUser = {
+                    id: NowDate,
+                    name: e.target.name.value,
+                    job: e.target.job.value,
+                    message: e.target.message.value,
+                };
+                enqueueSnackbar(`${value.name} successfully added`, {
+                    autoHideDuration: "2000",
+                    variant: "success",
+                });
+                dispatch(acAddCrud(newUser))
+            } else {
+                dispatch(acUpdateCrud(value));
+                setTypeHendelSubmit("Add")
+                setModalOpen(false);
+                setTimeout(() => {
+                    dispatch(acLoading(true));
+                }, "1")
+                setTimeout(() => {
+                    dispatch(acLoading(false));
+                }, "1500")
+                enqueueSnackbar(`${value.name} successfully edited`, {
+                    autoHideDuration: "2000",
+                    variant: "success",
+                });
+            }
+        e.preventDefault();
+        setValue({ name: "", job: "", message: "", })
+    }
+
+
+
+    const contactLength = dashUser.length
 
     return (
         <div>
@@ -34,16 +86,64 @@ export function BottomCards() {
                             <p>You have <span>{contactLength}</span> contacts</p>
                         </div>
                         <div id='bottom-contact-container-right'>
-                            <button>+</button>
+                            <button onClick={() => { setModalOpen(true) }}>+</button>
+                        </div>
+                    </div>
+                    <div id='message-modal-container' style={modalOpen ? { display: "block", textAlign: "center" } : { display: "none" }}>
+                        <div id='dash-contact-container-inside'>
+                            <div id='dash-contact-container-inside-header'>
+                                <h1 id="dash-contact-modal-form-h1">Add Contact</h1>
+                                <h2 onClick={() => { setModalOpen(false) }}>X</h2>
+                            </div>
+                            <form id='dash-contact-modal-form' onSubmit={addNewContact}>
+                                <TextField id="outlined-basic" label="Name..." variant="outlined"
+                                    name="name"
+                                    required
+                                    autoComplete="off"
+                                    onClick={() => {
+                                        if (dashUser.name !== "") {
+                                            console.log(dashUser.name);
+                                        } else {
+                                            alert("feadc");
+                                        }
+                                    }}
+                                    value={value.name}
+                                    onChange={(e) => { setValue({ ...value, name: e.target.value }) }}
+                                />
+                                <TextField
+                                    required
+                                    id="outlinedbasc"
+                                    label="Username..."
+                                    variant="outlined"
+                                    name="job"
+                                    autoComplete="off"
+                                    value={value.job}
+                                    onChange={(e) => { setValue({ ...value, job: e.target.value }) }}
+                                />
+                                <input
+                                    required
+                                    name="message"
+                                    autoComplete="off"
+                                    format="+998 (##) ### ####"
+                                    placeholder="+998 (##) ### ####"
+                                    thousandSeparator={true}
+                                    value={value.message}
+                                    onChange={(e) => { setValue({ ...value, message: e.target.value }) }}
+                                />
+
+
+                                <button
+                                    type="submit">{typeHendelSubmit}</button>
+                            </form>
                         </div>
                     </div>
                     <div id='bottom-contact-container-main'>
-                        {contacts.map((contact, index) => {
+                        {dashUser.map((contact, index) => {
                             return (
                                 <div
-                                id='bottom-contact-container-user'>
+                                    id='bottom-contact-container-user'>
                                     <div id='bottom-contact-container-user-left'
-                                     key={index}
+                                        key={index}
                                     >
                                         <div id='bottom-contact-container-user-left-div'>
 
@@ -62,6 +162,23 @@ export function BottomCards() {
                                         <div id='bottom-contact-container-user-right-second'>
                                             <img src={message} alt="" />
                                         </div>
+                                        <div onClick={() => {
+                                            dispatch(acDeleteCrud(contact.id))
+                                            enqueueSnackbar(`${contact.name} successfully deleted`, {
+                                                autoHideDuration: "2000",
+                                                variant: "success",
+                                            });
+                                        }} id='bottom-contact-container-user-right-third'>
+                                            <DeleteIcon />
+                                        </div>
+                                        <div onClick={() => {
+                                            setValue(contact)
+                                            setModalOpen(true);
+                                            setTypeHendelSubmit("Edit");
+                                            
+                                        }} id='bottom-contact-container-user-right-third'>
+                                            <EditIcon />
+                                        </div>
                                     </div>
                                 </div>
                             )
@@ -79,7 +196,7 @@ export function BottomCards() {
                             <a href=''>View All</a>
                         </div>
                     </div>
-                    {contacts.map((contact) => {
+                    {dashUser.map((contact) => {
                         return (
                             <div id='bottom-message-container-main'>
                                 <div id="bottom-contact-container-user">
@@ -91,8 +208,26 @@ export function BottomCards() {
                                             <p>{contact.message}</p>
                                         </div>
                                     </div>
-                                    <div id='bottom-message-container-main-user-right'>
-                                        <button>46</button>
+                                    <div id='bottom-contact-container-user-right'>
+                                        <div id='bottom-message-container-main-user-right'>
+                                            <button>46</button>
+                                        </div>
+                                        <div onClick={() => {
+                                            dispatch(acDeleteCrud(contact.id))
+                                            enqueueSnackbar(`${contact.name} successfully deleted`, {
+                                                autoHideDuration: "2000",
+                                                variant: "success",
+                                            });
+                                        }} id='bottom-contact-container-user-right-third'>
+                                            <DeleteIcon />
+                                        </div>
+                                        <div onClick={() => {
+                                            setValue(contact)
+                                            setModalOpen(true);
+                                            setTypeHendelSubmit("Edit");
+                                        }} id='bottom-contact-container-user-right-third'>
+                                            <EditIcon />
+                                        </div>
                                     </div>
                                 </div>
                             </div>

@@ -173,7 +173,7 @@
 #banking-main-container-right-transfer-container {
     display: flex;
     flex-direction: column;
-    
+
 }
 
 #banking-main-container-right-transfer-container-inside {
@@ -192,6 +192,9 @@
 #banking-main-container-right-transfer-container-inside-divs-container {
     display: flex;
     gap: 1rem;
+    flex-wrap: wrap;
+    width: 90%;
+    padding: 0 auto;
     justify-content: center;
 }
 
@@ -205,6 +208,29 @@
     background-color: #8A96B1;
     width: 45px;
     height: 45px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: red;
+}
+
+/* #banking-right-grey-div:hover #bankingEdite {
+    display: block;
+    color: red;
+}
+
+#banking-right-grey-div>#bankingEdite{
+    display: none;
+} */
+
+#banking-right-grey-background:hover #bankingDelete {
+    display: block;
+    color: red;
+}
+
+#banking-right-grey-background>#bankingDelete{
+    display: none;
 }
 
 #bankingright-blue-button-div {
@@ -243,10 +269,10 @@
     text-align: center;
     align-items: center;
     justify-content: center;
-    padding: 8px 0 ;
+    padding: 8px 0;
 }
 
-#banking-right-transfer-comtainer-send> img {
+#banking-right-transfer-comtainer-send>img {
     width: 20px;
     height: 20px;
 }
@@ -287,4 +313,16 @@
 #banking-right-container-text {
     padding: 25px 0 25px 36px;
     font-weight: 600;
+}
+
+#dash-contact-container-inside-header {
+    display: flex;
+    width: 70%;
+    justify-content: end;
+    /* align-items: center; */
+    gap: 2rem;
+}
+
+#dash-contact-container-inside-header>h2 {
+    padding-left: 60px;
 }
