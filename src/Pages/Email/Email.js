@@ -44,14 +44,16 @@ import greyStar from "../../Assets/Icons/Grey Star.svg"
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useDispatch, useSelector } from "react-redux";
-import { acAddCrud, acDeleteCrud, acUpdateCrud } from "../../Redux/CRUD";
+import { acEmailAddCrud, acEmailDeleteCrud, acEmailUpdateCrud } from "../../Redux/EmailCrud";
+import { acEmailLeftAddCrud, acEmailLeftDeleteCrud, acEmailLeftUpdateCrud } from "../../Redux/EmailLeft";
 import { useSnackbar } from 'notistack'
 import { acLoading } from '../../Redux/Loading'
+import IconButton from '@mui/material/IconButton';
 
 
 export function Email() {
-    const emailUsers = useSelector((state) => state.crud);
-    const emailMessages = useSelector((state) => state.crud);
+    const emailUsers = useSelector((state) => state.emailCrud);
+    const emailMessages = useSelector((state) => state.reEmailLeftCrud);
     const dispatch = useDispatch();
     const { enqueueSnackbar } = useSnackbar()
     const [user, setUser] = useState([]);
@@ -65,31 +67,48 @@ export function Email() {
     const [alignCenter, setAlignCenter] = useState(false)
     const [alignRight, setAlignRight] = useState(false)
     const [deleteItem, setDeleteItem] = useState(false)
+    const [valueRight, setValueRight] = useState([])
     const [message, setMessage] = useState([])
     const [modalOpen, setModalOpen] = useState(false)
     const [newContact, setNewContact] = useState([])
     const [value, setValue] = useState([])
     const [typeHendelSubmit, setTypeHendelSubmit] = useState("Add");
+    const [typeHendelSubmitLeft, setTypeHendelSubmitLeft] = useState("Add");
 
     const submitXabar = (e) => {
         e.preventDefault();
+        if (typeHendelSubmitLeft === "Add") {
+            const hozir = new Date().getTime()
+            const newEmailMessages = {
+                id: hozir,
+                emailLeftMes: e.target.mes.value,
+            };
+            setValueRight({ emailLeftMes: "" })
 
-        const hozir = new Date().getTime()
-        const newEmailMessages = {
-            newEmailMessagesId: hozir,
-            emailLeftMes: e.target.mes.value,
-        };
-        setValue({ emailLeftMes: "" })
-
-        dispatch(acAddCrud(newEmailMessages))
+            dispatch(acEmailLeftAddCrud(newEmailMessages))
+        } else {
+            dispatch(acEmailLeftUpdateCrud(valueRight));
+            setTypeHendelSubmitLeft("Add")
+            setTimeout(() => {
+                dispatch(acLoading(true));
+            }, "1")
+            setTimeout(() => {
+                dispatch(acLoading(false));
+            }, "1500")
+            enqueueSnackbar(`${valueRight.emailLeftMes} successfully edited`, {
+                autoHideDuration: "2000",
+                variant: "success",
+            });
+        }
+        setValueRight({ emailLeftMes: "", })
     }
 
     useEffect(() => {
-        localStorage.setItem("users", JSON.stringify(emailUsers));
+        localStorage.setItem("emailUsers", JSON.stringify(emailUsers));
     }, [emailUsers]);
 
     useEffect(() => {
-        localStorage.setItem("users", JSON.stringify(emailMessages));
+        localStorage.setItem("emailLeftMessages", JSON.stringify(emailMessages));
     }, [emailMessages]);
 
     const handleSelect = () => {
@@ -113,18 +132,18 @@ export function Email() {
             setModalOpen(false)
             const hoz = new Date().getTime()
             const newEmailContacts = {
-                newEmailContactsId: hoz,
+                id: hoz,
                 emailContactName: e.target.name.value,
                 emailContactJob: e.target.job.value,
             };
 
-            dispatch(acAddCrud(newEmailContacts))
+            dispatch(acEmailAddCrud(newEmailContacts))
             enqueueSnackbar(`${value.emailContactName} successfully added`, {
                 autoHideDuration: "2000",
                 variant: "success",
             });
         } else {
-            dispatch(acUpdateCrud(value));
+            dispatch(acEmailUpdateCrud(value));
             setTypeHendelSubmit("Add")
             setModalOpen(false);
             setTimeout(() => {
@@ -249,7 +268,7 @@ export function Email() {
                                                     <div id='email-main-container-left-inside-right-card-item-right-bottom-inside'>
                                                         <Checkbox icon={<img src={greyStar} />} checkedIcon={<img src={yellowStar} />} />
                                                         <DeleteIcon style={{ color: "grey" }} onClick={() => {
-                                                            dispatch(acDeleteCrud(item.newEmailContactsId))
+                                                            dispatch(acEmailDeleteCrud(item.id))
                                                             enqueueSnackbar(`${item.emailContactName} successfully deleted`, {
                                                                 autoHideDuration: "2000",
                                                                 variant: "success",
@@ -352,13 +371,37 @@ export function Email() {
                     {emailMessages.map((item, index) => {
                         return (
                             <div id="email-xabar-div">
-                                <h6>{item.emailLeftMes}</h6>
+                                <div id='email-xabar-div-inside'>
+                                    <h6>{item.emailLeftMes}</h6>
+                                    <div id='email-xabar-div-right'>
+                                        <IconButton>
+                                            <EditIcon
+                                                onClick={() => {
+                                                    setValueRight(item)
+                                                    setTypeHendelSubmitLeft("Edite")
+                                                }}
+                                            />
+                                        </IconButton>
+
+                                        <IconButton>
+                                            <DeleteIcon
+                                                onClick={() => {
+                                                    dispatch(acEmailLeftDeleteCrud(item.id))
+                                                    enqueueSnackbar(`${valueRight.emailLeftMes} successfully edited`, {
+                                                        autoHideDuration: "2000",
+                                                        variant: "success",
+                                                    });
+                                                }}
+                                            />
+                                        </IconButton>
+                                    </div>
+                                </div>
                             </div>
                         )
                     })}
                     <form onSubmit={submitXabar}>
                         <div id='email-main-container-right-message-container'>
-                            <input name='mes' value={value.emailLeftMes} type="text" onChange={(e) => { setValue({ ...value, emailLeftMes: e.target.value }) }} />
+                            <input name='mes' value={valueRight.emailLeftMes} type="text" onChange={(e) => { setValueRight({ ...valueRight, emailLeftMes: e.target.value }) }} />
                             <div id='email-main-container-right-message-container-bottom'>
                                 <div id='email-main-container-right-message-container-bottom-left'>
                                     <img src={betta} alt="" />
@@ -381,7 +424,7 @@ export function Email() {
                             </div>
                             <div id='email-main-container-right-message-bottom-right'>
                                 <button type='submit'>
-                                    Send
+                                    {typeHendelSubmitLeft}
                                 </button>
                                 <img src={sendLogo} alt="" />
                             </div>

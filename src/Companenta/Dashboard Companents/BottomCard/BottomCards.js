@@ -113,7 +113,7 @@ export function BottomCards() {
                                 <TextField
                                     required
                                     id="outlinedbasc"
-                                    label="Username..."
+                                    label="Job..."
                                     variant="outlined"
                                     name="job"
                                     autoComplete="off"
@@ -125,7 +125,7 @@ export function BottomCards() {
                                     name="message"
                                     autoComplete="off"
                                     format="+998 (##) ### ####"
-                                    placeholder="+998 (##) ### ####"
+                                    placeholder="Message..."
                                     thousandSeparator={true}
                                     value={value.message}
                                     onChange={(e) => { setValue({ ...value, message: e.target.value }) }}
@@ -174,7 +174,7 @@ export function BottomCards() {
                                         <div onClick={() => {
                                             setValue(contact)
                                             setModalOpen(true);
-                                            setTypeHendelSubmit("Edit");
+                                            setTypeHendelSubmit("Edite");
                                             
                                         }} id='bottom-contact-container-user-right-third'>
                                             <EditIcon />

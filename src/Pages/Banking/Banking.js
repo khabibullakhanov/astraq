@@ -20,15 +20,14 @@ import TextField from '@mui/material/TextField';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useSnackbar } from 'notistack'
 import { useDispatch, useSelector } from "react-redux";
-import { acAddCrud, acDeleteCrud, acUpdateCrud } from "../../Redux/CRUD";
+import { acBankingAddCrud, acBankingDeleteCrud, acBankingUpdateCrud } from "../../Redux/BankingCrud";
 import { acLoading } from "../../Redux/Loading";
 import { IconButton } from '@mui/material'
 import EditIcon from '@mui/icons-material/Edit';
-//  salom mastura 
 
 export function Banking() {
     const dispatch = useDispatch();
-    const bankingUsers = useSelector((state) => state.crud);
+    const bankingUsers = useSelector((state) => state.reBankingCrud);
 
     const { enqueueSnackbar } = useSnackbar()
     const [users, setUsers] = useState([]);
@@ -49,7 +48,7 @@ export function Banking() {
             })
     }, [])
     useEffect(() => {
-        localStorage.setItem("users", JSON.stringify(bankingUsers));
+        localStorage.setItem("bankingUsers", JSON.stringify(bankingUsers));
     }, [bankingUsers]);
 
     const lastPostIndex = currentPage * postsPerPage;
@@ -72,15 +71,14 @@ export function Banking() {
             const newBankingUser = {
                 id: NowDate,
                 bankingUserName: e.target.name.value,
-                bankingMoney: e.target.money.value,
             };
-            dispatch(acAddCrud(newBankingUser))
+            dispatch(acBankingAddCrud(newBankingUser))
             enqueueSnackbar(`${value.name} successfully added`, {
                 autoHideDuration: "2000",
                 variant: "success",
             });
         } else {
-            dispatch(acUpdateCrud(value));
+            dispatch(acBankingUpdateCrud(value));
             setTypeHendelSubmit("Add")
             setModalOpen(false);
             setTimeout(() => {
@@ -95,11 +93,7 @@ export function Banking() {
             });
         }
 
-        enqueueSnackbar("User successfully added", {
-            autoHideDuration: "2000",
-            variant: "success",
-        });
-        setValue({ bankingUserName: "", bankingMoney: "" })
+        setValue({ bankingUserName: "" })
     }
 
     return (
@@ -222,7 +216,7 @@ export function Banking() {
                                                         <EditIcon />
                                                     </IconButton>
                                                     <IconButton id='bankingDelete' onClick={() => {
-                                                        dispatch(acDeleteCrud(item.id))
+                                                        dispatch(acBankingDeleteCrud(item.id))
                                                         enqueueSnackbar(`${item.bankingUserName} successfully deleted`, {
                                                             autoHideDuration: "2000",
                                                             variant: "success",
@@ -247,7 +241,6 @@ export function Banking() {
                                         </div>
                                         <form id='dash-contact-modal-form' onSubmit={submitCards}>
                                             <TextField required name='name' value={value.bankingUserName} label="Type name..." variant="outlined" onChange={(e) => { setValue({ ...value, bankingUserName: e.target.value }) }} placeholder="Contact name..." />
-                                            <TextField required name='money' value={value.bankingMoney} label="Type amount..." variant="outlined" onChange={(e) => { setValue({ ...value, bankingMoney: e.target.value }) }} placeholder="Type amount..." />
                                             <button type='submit'>
                                                 {typeHendelSubmit}
                                             </button>
@@ -257,7 +250,7 @@ export function Banking() {
                             </div>
                             <div id='banking-main-container-right-amount-container'>
                                 <p id='grey-color'>Amount</p>
-                                <input id='font-weight-600' type="number" value={value.bankingMoney} />
+                                <input id='font-weight-600' type="number" />
                             </div>
                             <button id="banking-right-transfer-comtainer-send">Transfer <img src={sendImg} /></button>
                         </div>

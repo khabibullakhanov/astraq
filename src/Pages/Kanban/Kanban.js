@@ -13,10 +13,9 @@ import TextField from '@mui/material/TextField';
 import greyStar from "../../Assets/Icons/Grey Star.svg"
 import yellowStar from "../../Assets/Icons/Yellow Star.svg"
 import { Checkbox } from "@mui/material";
-import ClearIcon from '@mui/icons-material/Clear';
 import { useSnackbar } from 'notistack';
 import { useDispatch, useSelector } from "react-redux";
-import { acAddCrud, acDeleteCrud, acUpdateCrud } from "../../Redux/CRUD";
+import { acKanbanAddCrud, acKanbanDeleteCrud, acKanbanUpdateCrud } from "../../Redux/KanbanCrud";
 import { acLoading } from "../../Redux/Loading"
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -26,7 +25,7 @@ import EditIcon from '@mui/icons-material/Edit';
 
 export function Kanban() {
     const dispatch = useDispatch();
-    const kanbanUsers = useSelector((state) => state.crud);
+    const kanbanUsers = useSelector((state) => state.reKanbanCrud);
     const { enqueueSnackbar } = useSnackbar()
     const [modalOpen, setModalOpen] = useState(false)
     const [user, setUser] = useState([]);
@@ -37,7 +36,7 @@ export function Kanban() {
     const [typeHendelSubmit, setTypeHendelSubmit] = useState("Add");
 
     useEffect(() => {
-        localStorage.setItem("users", JSON.stringify(kanbanUsers));
+        localStorage.setItem("kanbanUsers", JSON.stringify(kanbanUsers));
     }, [kanbanUsers]);
 
     const cart = JSON.parse(localStorage.getItem("yangiProjekt") || "[]")
@@ -65,13 +64,13 @@ export function Kanban() {
                 kanbanColor: e.target.color.value,
             }
 
-            dispatch(acAddCrud(newKanban))
+            dispatch(acKanbanAddCrud(newKanban))
             enqueueSnackbar(`${value.kanbanName} successfully saved`, {
                 autoHideDuration: "2000",
                 variant: "success",
             });
         } else {
-            dispatch(acUpdateCrud(value));
+            dispatch(acKanbanUpdateCrud(value));
             setTypeHendelSubmit("Add")
             setModalOpen(false);
             setTimeout(() => {
@@ -114,10 +113,6 @@ export function Kanban() {
         });
     }
 
-    const deleteItemKanban = () => {
-        setRemove(true)
-        //    const newList = yangiProjects.filter((l) => l.id !)
-    }
 
     return (
         <div id='kanban-main-container'>
@@ -197,7 +192,7 @@ export function Kanban() {
                         const width = item.kanbanProgress + "%"
                         console.log(colors);
                         return (
-                            <div style={remove ? { display: "none" } : { display: "block" }} id='kanbar-user-card-content'>
+                            <div id='kanbar-user-card-content'>
                                 <div id='kanbar-user-card-content-left'>
                                     <div id='kanbar-user-card-content-left-div'>
                                     </div>
@@ -222,10 +217,10 @@ export function Kanban() {
                                         <img src={chatLogo} alt="" />
                                         <p>{item.kanbanMessage}</p>
                                     </div>
-                                    <div style={{marginTop:"10px", marginLeft:"-10px",}}>
+                                    <div style={deleteItems ? { display: "block", marginTop: "10px", marginLeft: "-10px", } : { display: "none" }}>
                                         <IconButton
                                             onClick={() => {
-                                                dispatch(acDeleteCrud(item.id))
+                                                dispatch(acKanbanDeleteCrud(item.id))
                                                 enqueueSnackbar(`${item.kanbanName} successfully deleted`, {
                                                     autoHideDuration: "2000",
                                                     variant: "success",

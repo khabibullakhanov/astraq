@@ -10,7 +10,7 @@ import GridViewIcon from '@mui/icons-material/GridView';
 import ViewAgendaIcon from '@mui/icons-material/ViewAgenda';
 import TextField from '@mui/material/TextField';
 import { useDispatch, useSelector } from "react-redux";
-import { acAddCrud, acDeleteCrud, acUpdateCrud } from "../../../Redux/CRUD";
+import { acContactAddCrud, acContactDeleteCrud, acContactUpdateCrud } from "../../../Redux/ContactCrud";
 import { useSnackbar } from 'notistack'
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
@@ -19,7 +19,7 @@ import { acLoading } from '../../../Redux/Loading'
 
 export function ContactUser() {
     const { enqueueSnackbar } = useSnackbar();
-    const contacts = useSelector((state) => state.crud);
+    const contacts = useSelector((state) => state.reContactCrud);
     const dispatch = useDispatch();
 
     const [row, setRow] = useState(false)
@@ -33,7 +33,7 @@ export function ContactUser() {
     }
 
     useEffect(() => {
-        localStorage.setItem("users", JSON.stringify(contacts));
+        localStorage.setItem("contactUsers", JSON.stringify(contacts));
     }, [contacts]);
 
     const addNewContact = (e) => {
@@ -55,9 +55,9 @@ export function ContactUser() {
                 contactsPhone: e.target.phone.value,
                 contactsMessage: e.target.email.value,
             }
-            dispatch(acAddCrud(newContacts))
+            dispatch(acContactAddCrud(newContacts))
         } else {
-            dispatch(acUpdateCrud(value));
+            dispatch(acContactUpdateCrud(value));
             setTypeHendelSubmit("Add")
             setModalOpen(false);
             setTimeout(() => {
@@ -157,7 +157,7 @@ export function ContactUser() {
                                             <DeleteIcon
                                                 style={{ color: "#5149E4", fontSize: "25px" }}
                                                 onClick={() => {
-                                                    dispatch(acDeleteCrud(item.id))
+                                                    dispatch(acContactDeleteCrud(item.id))
                                                     enqueueSnackbar(`${item.contactsName} successfully deleted`, {
                                                         autoHideDuration: "2000",
                                                         variant: "success",

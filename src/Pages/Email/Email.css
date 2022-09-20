@@ -347,6 +347,22 @@
 #email-xabar-div {
     display: flex;
     flex-direction: column;
-    text-align: center;
+    align-items: center;
+    justify-content: center;
     gap: 4rem;
+}
+
+#email-xabar-div-inside {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+#email-xabar-div-right {
+    display: none;
+}
+
+#email-xabar-div-inside:hover #email-xabar-div-right {
+    display: block;
+    transition: 1s ease-in-out;
 }
