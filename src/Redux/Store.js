@@ -6,6 +6,8 @@ import { reKanbanCrud } from "./KanbanCrud";
 import { reLoading } from "./Loading";
 import { reBankingCrud } from "./BankingCrud";
 import { reEmailLeftCrud } from "./EmailLeft";
+import { reHeaderChatCrud } from "./HeaderChatCrud";
+
 
 const reducer = combineReducers({
   crud: reCrud,
@@ -15,6 +17,7 @@ const reducer = combineReducers({
   reKanbanCrud,
   reBankingCrud,
   reEmailLeftCrud,
+  reHeaderChatCrud,
 });
 
 export const Store = configureStore({

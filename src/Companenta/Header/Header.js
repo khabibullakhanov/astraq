@@ -11,42 +11,52 @@ import GraphicEqIcon from "@mui/icons-material/GraphicEq";
 import SendIcon from "@mui/icons-material/Send";
 import { Checkbox } from "@mui/material";
 import searchIcon from "../../Assets/Icons/Search.svg";
-import { DashboardContacts } from "../Data/DashboardContacts";
-import Autocomplete from '@mui/material/Autocomplete';
-
+import { useDispatch, useSelector } from "react-redux";
+import { acHeaderChatAddCrud, acHeaderChatDeleteCrud, acHeaderChatUpdateCrud } from "../../Redux/HeaderChatCrud";
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import { IconButton } from "@mui/material";
 
 export function Header() {
+  const dispatch = useDispatch();
+  const headerChatCrud = useSelector((state) => state.reHeaderChatCrud)
   const ref1 = useRef();
   const [see, setSee] = useState(false);
-  // const [user, setUser] = useState([]);
   const [sendIcon, setSendIcon] = useState(false);
   const [message, setMessage] = useState([]);
-  const [search, setSearch] = useState("");
-  const [datas, setDatas] = useState([]);
+  const [value, setValue] = useState([])
+  const [chatImg, setChatImg] = useState({
+    imgMessage: {},
+  })
+  const [typeHendelSubmit, setTypeHendelSubmit] = useState("Add");
   const cart = JSON.parse(localStorage.getItem("xabarlar") || "[]");
 
-  const submitMessage = () => {
-    ref1.current.value = null;
-    window.location.reload();
-    setSee(false);
-    localStorage.setItem("xabarlar", JSON.stringify([...cart, message]));
+  const submitMessage = (e) => {
+    e.preventDefault();
+    if (typeHendelSubmit === "Add") {
+      const nowDate = new Date().getTime()
+      const newMessages = {
+        id: nowDate,
+        chatMessage: e.target.headerMessage.value,
+      }
+      dispatch(acHeaderChatAddCrud(newMessages))
+    } else {
+      dispatch(acHeaderChatUpdateCrud(value))
+    }
+    setValue({ chatMessage: "" })
   };
 
-  const allData = JSON.parse(localStorage.getItem("users") || "[]")
-
+  useEffect(() => {
+    localStorage.setItem("headerChats", JSON.stringify(headerChatCrud));
+  }, [headerChatCrud]);
 
   return (
     <div id="header-container">
       <form id="search-form">
-        {/* <SearchIcon/> */}
         <img src={searchIcon} alt="" />
         <input
           type="text"
-          placeholder="Search here..."
-          onChange={(event) => {
-            setSearch(event.target.value);
-          }}
-        />
+          placeholder="Search here..." />
 
       </form>
 
@@ -60,9 +70,9 @@ export function Header() {
         <div>
           <input type="color" id="color-input" value="#8A96B1" />
           <select>
-            <option value="">Uzb</option>
-            <option value="">Rus</option>
-            <option value="">Eng</option>
+            <option>Uzb</option>
+            <option>Rus</option>
+            <option>Eng</option>
           </select>
         </div>
       </div>
@@ -85,12 +95,33 @@ export function Header() {
           </div>
           <div id="message-modal-container-body">
             {
-              /* <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsam, laborum. Impedit reiciendis ipsum deleniti enim blanditiis, incidunt praesentium! Optio beatae at totam unde nostrum. Reprehenderit illo magnam quae corporis unde?Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio ipsum fuga recusandae illum iure omnis, similique dolore accusantium corrupti expedita nesciunt voluptate ducimus nemo, repellendus voluptatem. Quas odit eius numquam?Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi nam earum, sunt aliquam eaque, ad saepe cum ea fuga quis sit dolores. Adipisci minima nesciunt at aliquid magni ea asperiores.</p>
-                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsam, laborum. Impedit reiciendis ipsum deleniti enim blanditiis, incidunt praesentium! Optio beatae at totam unde nostrum. Reprehenderit illo magnam quae corporis unde?Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio ipsum fuga recusandae illum iure omnis, similique dolore accusantium corrupti expedita nesciunt voluptate ducimus nemo, repellendus voluptatem. Quas odit eius numquam?Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi nam earum, sunt aliquam eaque, ad saepe cum ea fuga quis sit dolores. Adipisci minima nesciunt at aliquid magni ea asperiores.</p>
-                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsam, laborum. Impedit reiciendis ipsum deleniti enim blanditiis, incidunt praesentium! Optio beatae at totam unde nostrum. Reprehenderit illo magnam quae corporis unde?Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio ipsum fuga recusandae illum iure omnis, similique dolore accusantium corrupti expedita nesciunt voluptate ducimus nemo, repellendus voluptatem. Quas odit eius numquam?Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi nam earum, sunt aliquam eaque, ad saepe cum ea fuga quis sit dolores. Adipisci minima nesciunt at aliquid magni ea asperiores.</p> */
+              headerChatCrud.map((item, index) => {
+                return (
+                  <div id="header-chat-content" key={index}>
+                    <div>
+                      <h3>{item.chatMessage}</h3>
+                      <img src={chatImg.imgMessage.size ? URL.createObjectURL(chatImg.imgMessage) : {}} alt="" />
+                    </div>
+                    <div>
+                      <IconButton
+                        onClick={() => {
+                          dispatch(acHeaderChatDeleteCrud(item.id))
+                        }}
+                      >
+                        <DeleteIcon />
+                      </IconButton>
 
-              cart.map((item, index) => {
-                return <p>{item.mess}</p>;
+                      <IconButton
+                        onClick={() => {
+                          setValue(item)
+                          setTypeHendelSubmit("Edite")
+                        }}
+                      >
+                        <EditIcon />
+                      </IconButton>
+                    </div>
+                  </div>
+                )
               })
             }
           </div>
@@ -98,18 +129,18 @@ export function Header() {
             <div id="message-modal-container-bottom">
               <div id="message-modal-container-bottom-left">
                 <label>
-                  <input type="file" id="message-modal-container-file" />
+                  <input type="file" name="imgMessage" id="message-modal-container-file" />
                   <AttachFileIcon id="message-modal-container-bottom-clip-icon" />
                 </label>
-                <TextField
-                  ref={ref1}
-                  id="standard-basic"
-                  label="Write a message..."
-                  variant="standard"
-                  sx={{ color: "#8A96B1" }}
-                  onChange={(e) => {
-                    setMessage({ ...message, mess: e.target.value });
-                  }}
+                <input
+                  id="header-chat-input"
+                  name="headerMessage"
+                  value={value.chatMessage}
+                  onChange={(e) => { setValue({ ...value, chatMessage: e.target.value }) }}
+                // id="standard-basic"
+                // label="Write a message..."
+                // variant="standard"
+                // sx={{ color: "#8A96B1" }}
                 />
               </div>
               <div id="message-modal-container-bottom-right">
@@ -127,10 +158,7 @@ export function Header() {
                     />
                   }
                 />
-                <SendIcon
-                  onClick={submitMessage}
-                  id="message-modal-container-bottom-send-icon"
-                />
+                <button id="header-chat-btn" type="submit">{typeHendelSubmit}</button>
               </div>
             </div>
           </form>

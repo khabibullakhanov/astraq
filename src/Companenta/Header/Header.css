@@ -149,9 +149,45 @@
     /* background-color: blue; */
     align-items: baseline;
 }
+
 #message-modal-container-bottom-left {
     width: 80%;
     gap: 0.5rem;
     display: flex;
     align-items: baseline;
+}
+
+#header-chat-content {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1rem;
+}
+
+#header-chat-content> :nth-child(1)>h3 {
+    font-weight: 300;
+    font-size: 22px;
+    padding-top: 20px;
+}
+
+#header-chat-input {
+    outline: none;
+    background: none;
+    border: none;
+    border-bottom: 1px solid black;
+    border-radius: 2px;
+    font-size: 20px;
+    width: 100%;
+    height: 30px;
+}
+
+#header-chat-btn {
+    outline: none;
+    border: none;
+    font-size: 20px;
+    margin-right: 20px;
+    margin-top: -10px;
+    color: rgb(163, 163, 163);
+    background: none;
 }
