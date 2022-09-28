@@ -8,9 +8,7 @@ import { TicketingPaginationCards } from '../../Companenta/Ticketing/TicketingPa
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import LightModeIcon from '@mui/icons-material/LightMode';
-import Calendar from 'react-calendar'
 import 'react-calendar/dist/Calendar.css';
-import moment from 'moment'
 
 export function Ticketing() {
 
@@ -42,10 +40,7 @@ export function Ticketing() {
     const firstPostIndex = lastPostIndex - postsPerPage;
     const currentUsers = user.slice(firstPostIndex, lastPostIndex);
 
-    const [dateState, setDateState] = useState(new Date())
-    const changeDate = (e) => {
-        setDateState(e)
-    }
+
 
     return (
         <div id="ticketing-main-container">

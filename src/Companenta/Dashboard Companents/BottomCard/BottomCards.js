@@ -1,26 +1,23 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import "./BottomCards.css"
 import message from "../../../Assets/Icons/Message.svg"
 import phone from "../../../Assets/Icons/Phone.svg"
-import doubleTrue from "../../../Assets/Icons/Pink Double True.svg"
-// import { DashboardContacts } from "../../Data/DashboardContacts"
 import DeleteIcon from '@mui/icons-material/Delete';
 import TextField from '@mui/material/TextField';
 import { useDispatch, useSelector } from "react-redux";
 import { acAddCrud, acDeleteCrud, acUpdateCrud } from "../../../Redux/CRUD";
 import { useSnackbar } from 'notistack'
 import EditIcon from '@mui/icons-material/Edit';
-import NumberFormat from "react-number-format";
 import { acLoading } from "../../../Redux/Loading";
+import { useNavigate } from 'react-router-dom';
 
 export function BottomCards() {
 
     const dispatch = useDispatch();
+    const navigate = useNavigate()
     const dashUser = useSelector((state) => state.crud);
     const { enqueueSnackbar } = useSnackbar()
-    const [contacts, setContacts] = useState([])
     const [modalOpen, setModalOpen] = useState(false)
-    const [newContact, setNewContact] = useState([])
     const [value, setValue] = useState([])
     const [typeHendelSubmit, setTypeHendelSubmit] = useState("Add");
     useEffect(() => {
@@ -45,6 +42,7 @@ export function BottomCards() {
                 name: e.target.name.value,
                 job: e.target.job.value,
                 message: e.target.message.value,
+                tel: e.target.tel.value,
             };
             enqueueSnackbar(`${value.name} successfully added`, {
                 autoHideDuration: "2000",
@@ -70,7 +68,7 @@ export function BottomCards() {
         setValue({ name: "", job: "", message: "", })
     }
 
-   
+
 
 
     const contactLength = dashUser.length
@@ -123,11 +121,15 @@ export function BottomCards() {
                                 <input
                                     required
                                     name="message"
-                                    autoComplete="off"
-                                    format="+998 (##) ### ####"
                                     placeholder="Message..."
                                     value={value.message}
                                     onChange={(e) => { setValue({ ...value, message: e.target.value }) }}
+                                />
+                                <input
+                                    value={value.tel}
+                                    type="tel"
+                                    name="tel"
+                                    onChange={(e) => { setValue({ ...value, tel: e.target.value }) }}
                                 />
 
 
@@ -138,14 +140,11 @@ export function BottomCards() {
                     </div>
                     <div id='bottom-contact-container-main'>
                         {dashUser.map((contact, index) => {
+                            const telRaqam = `tel:${contact.tel}`
                             return (
-                                <div
-                                    id='bottom-contact-container-user'>
-                                    <div id='bottom-contact-container-user-left'
-                                        key={index}
-                                    >
+                                <div id='bottom-contact-container-user'>
+                                    <div id='bottom-contact-container-user-left' key={index}>
                                         <div id='bottom-contact-container-user-left-div'>
-
                                         </div>
                                         <div id='bottom-contact-container-user-left-text'>
                                             <h4>{contact.name}</h4>
@@ -153,8 +152,9 @@ export function BottomCards() {
                                         </div>
                                     </div>
                                     <div id='bottom-contact-container-user-right'>
-                                        <div id='bottom-contact-container-user-right-first'>
-                                            <a href="tel:+998941744904">
+                                        <div id='bottom-contact-container-user-right-first'
+                                        >
+                                            <a href={telRaqam}>
                                                 <img src={phone} alt="" />
                                             </a>
                                         </div>
@@ -183,7 +183,7 @@ export function BottomCards() {
                             )
                         })}
                     </div>
-                    <button id='bottom-contact-btn'>View More</button>
+                    <button id='bottom-contact-btn' onClick={() => { navigate("viewAll") }} >View More</button>
                 </div>
                 <div id='bottom-message-container'>
                     <div id='bottom-contact-container-header'>
@@ -191,7 +191,7 @@ export function BottomCards() {
                             <h2>Message</h2>
                             <p>You have <span>{contactLength}</span> contacts</p>
                         </div>
-                        <div id='bottom-message-container-right'>
+                        <div id='bottom-message-container-right' onClick={() => { navigate("viewAll") }}>
                             <a href=''>View All</a>
                         </div>
                     </div>
@@ -232,7 +232,7 @@ export function BottomCards() {
                             </div>
                         )
                     })}
-                    <div id="bottom-message-container-footer">
+                    <div id="bottom-message-container-footer" onClick={() => { navigate("viewAll") }}>
                         <button>View More</button>
                     </div>
                 </div>

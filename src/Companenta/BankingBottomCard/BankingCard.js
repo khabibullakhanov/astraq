@@ -1,6 +1,5 @@
 import React from 'react'
 import oldiberdiBanking from "../../Assets/Icons/Oldi berdi Banking.svg"
-import orangeSmallCard from "../../Assets/Icons/Orange small box.svg"
 import greenSmallCard from "../../Assets/Icons/Green small box.svg"
 import skripka from "../../Assets/Icons/Skripka.svg"
 import uchNuqta from "../../Assets/Icons/3 nuqta.svg"

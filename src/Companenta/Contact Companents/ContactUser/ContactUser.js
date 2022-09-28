@@ -149,7 +149,7 @@ export function ContactUser() {
                                 </div>
                                 <div id="user-email">
                                     <img src={message} alt="" />
-                                    <span>{item.contactsMessage}</span>
+                                    <span>{item.contactsMessage.length !== 10 ? item.contactsMessage.slice(0, 26) : {}}</span>
                                 </div>
                                 <div style={{ display: "flex", marginLeft: "-10px" }}>
                                     <div id="user-email">

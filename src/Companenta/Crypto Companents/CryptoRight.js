@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 import "./CryptoRight.css"
 import { CryptoRightStatistics } from './CryptoRightStatistics'
 import bitcoinLogo from "../../Assets/Icons/BitCoin Logo.svg"
@@ -23,8 +23,8 @@ export function CryptoRight() {
             <div>
                 <CryptoRightStatistics />
             </div>
-                <h2>Recent Trading</h2>
-                <h2></h2>
+            <h2>Recent Trading</h2>
+            <h2></h2>
             <div>
                 <div id="crypto-right-inside-content">
                     <div id="crypto-right-inside-content-first">

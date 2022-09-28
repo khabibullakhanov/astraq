@@ -1,14 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./Header.css";
-import SearchIcon from "@mui/icons-material/Search";
 import chat from "../../Assets/Icons/Chat logo.svg";
 import rupor from "../../Assets/Icons/Ovoz kuchaytirgich.svg";
 import { Link } from "react-router-dom";
-import TextField from "@mui/material/TextField";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
 import KeyboardVoiceIcon from "@mui/icons-material/KeyboardVoice";
 import GraphicEqIcon from "@mui/icons-material/GraphicEq";
-import SendIcon from "@mui/icons-material/Send";
 import { Checkbox } from "@mui/material";
 import searchIcon from "../../Assets/Icons/Search.svg";
 import { useDispatch, useSelector } from "react-redux";
@@ -20,18 +17,11 @@ import { IconButton } from "@mui/material";
 export function Header() {
   const dispatch = useDispatch();
   const headerChatCrud = useSelector((state) => state.reHeaderChatCrud)
-  const ref1 = useRef();
   const [see, setSee] = useState(false);
-  const [sendIcon, setSendIcon] = useState(false);
-  const [message, setMessage] = useState([]);
   const [value, setValue] = useState([])
-  const [chatImg, setChatImg] = useState({
-    imgMessage: {},
-  })
+  const [chatImg, setChatImg] = useState({ imgMessage: {}, })
   const [typeHendelSubmit, setTypeHendelSubmit] = useState("Add");
-  const cart = JSON.parse(localStorage.getItem("xabarlar") || "[]");
-
-  const submitMessage = (e) => {
+  const submitChat = (e) => {
     e.preventDefault();
     if (typeHendelSubmit === "Add") {
       const nowDate = new Date().getTime()
@@ -42,6 +32,7 @@ export function Header() {
       dispatch(acHeaderChatAddCrud(newMessages))
     } else {
       dispatch(acHeaderChatUpdateCrud(value))
+      setTypeHendelSubmit("Add")
     }
     setValue({ chatMessage: "" })
   };
@@ -49,7 +40,6 @@ export function Header() {
   useEffect(() => {
     localStorage.setItem("headerChats", JSON.stringify(headerChatCrud));
   }, [headerChatCrud]);
-
   return (
     <div id="header-container">
       <form id="search-form">
@@ -68,7 +58,7 @@ export function Header() {
           <img src={rupor} alt="" />
         </Link>
         <div>
-          <input type="color" id="color-input" value="#8A96B1" />
+          <input type="color" id="color-input"  onChange={(e) => { setValue({ ...value, color: e.target.value }) }} />
           <select>
             <option>Uzb</option>
             <option>Rus</option>
@@ -125,7 +115,7 @@ export function Header() {
               })
             }
           </div>
-          <form onSubmit={submitMessage} id="message-modal-container-form">
+          <form onSubmit={submitChat} id="message-modal-container-form">
             <div id="message-modal-container-bottom">
               <div id="message-modal-container-bottom-left">
                 <label>
@@ -137,10 +127,6 @@ export function Header() {
                   name="headerMessage"
                   value={value.chatMessage}
                   onChange={(e) => { setValue({ ...value, chatMessage: e.target.value }) }}
-                // id="standard-basic"
-                // label="Write a message..."
-                // variant="standard"
-                // sx={{ color: "#8A96B1" }}
                 />
               </div>
               <div id="message-modal-container-bottom-right">

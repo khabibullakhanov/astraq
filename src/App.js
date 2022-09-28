@@ -12,6 +12,7 @@ import { Banking } from './Pages/Banking/Banking';
 import { Ticketing } from './Pages/Ticketing/Ticketing';
 import { useSelector } from "react-redux";
 import { Backdrop, CircularProgress } from "@mui/material";
+import { ViewAll } from './Pages/Contact/ViewAll';
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
             <Route path="/invoice" element={<Invoice />} />
             <Route path="/banking" element={<Banking />} />
             <Route path="/ticketing" element={<Ticketing />} />
+            <Route path="/viewAll" element={<ViewAll />} />
           </Routes>
 
         </div>

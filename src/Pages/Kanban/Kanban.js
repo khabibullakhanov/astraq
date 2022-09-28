@@ -1,11 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import { KanbanNavbar } from '../../Companenta/Kanban/KanbanNavbar'
-import { KanbanUserCard } from '../../Companenta/Kanban/KanbanUserCard'
 import "./Kanban.css"
-import StarBorderIcon from '@mui/icons-material/StarBorder';
 import userIcon from "../../Assets/Icons/user Icon.svg"
 import { Header } from "../../Companenta/Header/Header"
-import { KanbanUsersData } from '../../Companenta/Data/KanbanUsersData';
 import team from "../../Assets/Icons/Team.svg"
 import skripka from "../../Assets/Icons/Skripka.svg"
 import chatLogo from "../../Assets/Icons/Chat logo.svg"
@@ -28,10 +25,7 @@ export function Kanban() {
     const kanbanUsers = useSelector((state) => state.reKanbanCrud);
     const { enqueueSnackbar } = useSnackbar()
     const [modalOpen, setModalOpen] = useState(false)
-    const [user, setUser] = useState([]);
-    const [newProject, setNewProject] = useState([])
     const [deleteItems, setDeleteItems] = useState(false)
-    const [remove, setRemove] = useState(false)
     const [value, setValue] = useState([])
     const [typeHendelSubmit, setTypeHendelSubmit] = useState("Add");
 
@@ -39,8 +33,6 @@ export function Kanban() {
         localStorage.setItem("kanbanUsers", JSON.stringify(kanbanUsers));
     }, [kanbanUsers]);
 
-    const cart = JSON.parse(localStorage.getItem("yangiProjekt") || "[]")
-    localStorage.setItem("yangiProjektLength", JSON.stringify(user.length))
     const addNewContact = (e) => {
         e.preventDefault();
         setTimeout(() => {
@@ -86,7 +78,6 @@ export function Kanban() {
         }
     }
 
-    const yangiProjects = cart.concat(user)
 
     const data = [
         '#6263',

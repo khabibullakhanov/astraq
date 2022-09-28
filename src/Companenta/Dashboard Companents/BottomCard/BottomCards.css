@@ -5,6 +5,8 @@
     justify-content: center;
 }
 
+
+
 #bottom-contact-container {
     width: 48%;
     background-color: #F9FAFF;
@@ -101,7 +103,7 @@
     padding: 10px 15px;
 }
 
-#bottom-contact-container-user-right-third > * {
+#bottom-contact-container-user-right-third>* {
     font-size: 28px;
 }
 
@@ -195,10 +197,11 @@
     font-size: 1.2rem;
     border-radius: 4px;
     background: none;
+    border: 1px solid black;
     letter-spacing: 0.11rem;
 }
 
-#dash-contact-modal-form > button {
+#dash-contact-modal-form>button {
     background: #4d9ee9;
     cursor: pointer;
     color: #ffffff;
@@ -226,8 +229,7 @@
     box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
 }
 
-#dash-contact-container-inside > h1 {
+#dash-contact-container-inside>h1 {
     font-weight: 600;
     font-size: 40px;
 }
-

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import "./Banking.css"
 import { Header } from "../../Companenta/Header/Header"
 import kokSt from "../../Assets/Images/Blue Statistics Banking.png"
@@ -34,7 +34,6 @@ export function Banking() {
     const [currentPage, setCurrentPage] = useState(1)
     const [postsPerPage, setpostsPerPage] = useState(8)
     const [modalOpen, setModalOpen] = useState(false)
-    const [cards, setCards] = useState([])
     const [value, setValue] = useState([])
     const [typeHendelSubmit, setTypeHendelSubmit] = useState("Add");
 
@@ -55,8 +54,6 @@ export function Banking() {
     const firstPostIndex = lastPostIndex - postsPerPage;
     const currentUsers = users.slice(firstPostIndex, lastPostIndex);
 
-    const cart = JSON.parse(localStorage.getItem("yangiCardlar") || "[]")
-    localStorage.setItem("yangiCardlarLength", JSON.stringify(users.length))
     const submitCards = (e) => {
         e.preventDefault();
         setTimeout(() => {

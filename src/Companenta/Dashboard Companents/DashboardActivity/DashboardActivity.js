@@ -4,7 +4,6 @@ import siyohrangTortburchak from "../../../Assets/Icons/Siyohrang Tortburchak.sv
 import pushtiTortburchak from "../../../Assets/Icons/Pushti Tortburchak.svg"
 import yashilTortburchak from "../../../Assets/Icons/Yashil Tortburchak.svg"
 import orangeTortburchak from "../../../Assets/Icons/Orange Tortburchak.svg"
-import borderImg from "../../../Assets/Images/border.png"
 
 
 export function DashboardActivity() {
@@ -15,9 +14,6 @@ export function DashboardActivity() {
                 <img src={pushtiTortburchak} alt="" />
                 <img src={yashilTortburchak} alt="" />
                 <img src={orangeTortburchak} alt="" />
-                {/* <div>
-                    <img id="border-img" src={borderImg} alt="" />
-                </div> */}
             </div>
             <div id='dashboard-percent-main-right'>
                 <div id="dashboard-percent-main-right-container">

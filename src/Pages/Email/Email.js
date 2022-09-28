@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import "./Email.css"
 import { Header } from "../../Companenta/Header/Header"
 import { NavLink } from 'react-router-dom'
@@ -14,9 +14,6 @@ import pushtiTortburchak from "../../Assets/Icons/Email Pnk Rectangle.svg"
 import orangeTortburchak from "../../Assets/Icons/Email Yellow Rectangle.svg"
 import team from "../../Assets/Icons/Team.svg"
 import card from "../../Assets/Icons/25-credit card.svg"
-import { EmailUsers } from "../../Companenta/Data/EmailUsers"
-import { EmailItem } from '../../Companenta/Email/EmailItem'
-import { EmailPagination } from "../../Companenta/Email/EmailPagination"
 import trash from "../../Assets/Icons/Trash Icon.svg"
 import krestik from "../../Assets/Icons/Iks Icon.svg"
 import tepgagaPastga from "../../Assets/Icons/tepaga Strelka.svg"
@@ -26,11 +23,8 @@ import betta from "../../Assets/Icons/Betta.svg"
 import yonlaganI from "../../Assets/Icons/Yonlagan I.svg"
 import underLine from "../../Assets/Icons/U Underline.svg"
 import tLogo from "../../Assets/Icons/T logo.svg"
-import alignLeft from "../../Assets/Icons/Align Left.svg"
 import FormatAlignLeftIcon from '@mui/icons-material/FormatAlignLeft';
-import alignCenter from "../../Assets/Icons/Align Center.svg"
 import FormatAlignCenterIcon from '@mui/icons-material/FormatAlignCenter';
-import alignRight from "../../Assets/Icons/Align Right.svg"
 import FormatAlignRightIcon from '@mui/icons-material/FormatAlignRight';
 import galareya from "../../Assets/Icons/Galareya Icon.svg"
 import skripka from "../../Assets/Icons/Grey Skripka.svg"
@@ -160,8 +154,8 @@ export function Email() {
         setValue({ emailContactName: "", emailContactJob: "", })
 
     }
-    const y = new Date()
-    const hour = y.getMinutes()
+    const v = new Date().toLocaleTimeString()
+    const hours = v
 
     return (
         <div id='email-main-container'>
@@ -257,14 +251,16 @@ export function Email() {
                                 {emailUsers.map((item, index) => {
                                     return (
                                         <div id='email-main-container-left-inside-right-card-item'>
-                                            <div id='email-main-container-left-inside-right-card-item-left'></div>
-                                            <div id='email-main-container-left-inside-right-card-item-right'>
+                                            <div id='email-main-container-left-inside-right-card-item-header'>
+                                                <div id='email-main-container-left-inside-right-card-item-left'></div>
                                                 <div>
                                                     <h3 id='font-weight-600'>{item.emailContactName}</h3>
                                                     <p id='email-main-container-left-inside-right-card-item-right-text'>{item.emailContactJob}</p>
                                                 </div>
+                                            </div>
+                                            <div id='email-main-container-left-inside-right-card-item-right'>
                                                 <div id='email-main-container-left-inside-right-card-item-right-bottom'>
-                                                    <p id='grey-color'>{hour} min ago</p>
+                                                    <p id='grey-color'>{hours}</p>
                                                     <div id='email-main-container-left-inside-right-card-item-right-bottom-inside'>
                                                         <Checkbox icon={<img src={greyStar} />} checkedIcon={<img src={yellowStar} />} />
                                                         <DeleteIcon style={{ color: "grey" }} onClick={() => {
@@ -286,12 +282,6 @@ export function Email() {
                                     )
                                 })}
                             </div>
-                            {/* <EmailPagination
-                                totalPosts={emailUsers.length}
-                                setCurrentPage={setCurrentPage}
-                                postsPerPage={postsPerPage}
-                                currentPage={currentPage}
-                            /> */}
                         </div>
                     </div>
                 </div>
@@ -370,7 +360,7 @@ export function Email() {
                     </div>
                     {emailMessages.map((item, index) => {
                         return (
-                            <div id="email-xabar-div">
+                            <div id="email-xabar-div" style={alignLeft ? { textAlign: "left" } : { textAlign: "center" }}>
                                 <div id='email-xabar-div-inside'>
                                     <h6>{item.emailLeftMes}</h6>
                                     <div id='email-xabar-div-right'>
@@ -412,7 +402,7 @@ export function Email() {
                                 <div id='email-main-container-right-message-container-bottom-right'>
                                     <FormatAlignLeftIcon style={{ color: "#8A96B1" }} onClick={() => { setAlignLeft(true) }} />
                                     <FormatAlignCenterIcon style={{ color: "#8A96B1" }} onClick={() => { setAlignCenter(true) }} />
-                                    <FormatAlignRightIcon style={{ color: "#8A96B1" }} onClick={() => { setAlignRight(true) }} />
+                                    <FormatAlignRightIcon style={{ color: "#8A96B1" }} />
                                 </div>
                             </div>
                         </div>

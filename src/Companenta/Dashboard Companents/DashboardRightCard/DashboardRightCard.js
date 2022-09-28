@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import "./DashboardRightCard.css"
 import star from "../../../Assets/Icons/Alone Star.svg"
 import Greystar from "../../../Assets/Icons/Alone Grey Star.svg"
