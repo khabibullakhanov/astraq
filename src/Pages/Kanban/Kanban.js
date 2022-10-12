@@ -195,9 +195,9 @@ export function Kanban() {
                                         <p>Progress</p>
                                         <p>{item.kanbanProgress}</p>
                                     </div>
-                                    <div className="w3-light-grey w3-round-xlarge">
+                                    <div className="w3-light-grey w3-round-xlarge" id=''>
                                         <div className="w3-container w3-round-xlarge" style={{
-                                            backgroundColor: colors, width: width, paddingBlock: "6px",
+                                            backgroundColor: colors, borderRadius: "50px", width: width, paddingBlock: "6px",
                                         }}></div>
                                     </div>
                                     <div id='kanbar-user-card-content-right-icons'>
