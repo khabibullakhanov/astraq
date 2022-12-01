@@ -310,7 +310,7 @@
 #dash-contact-container-inside-header {
     display: flex;
     width: 70%;
-    justify-content: end;
+    justify-content: flex-end;
     /* align-items: center; */
     gap: 2rem;
 }
