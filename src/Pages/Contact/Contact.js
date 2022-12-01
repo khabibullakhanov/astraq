@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import "./Contact.css"
 import { Header } from "../../Companenta/Header/Header"
 import { ContactUser } from '../../Companenta/Contact Companents/ContactUser/ContactUser'
@@ -7,9 +7,9 @@ import { ContactPagination } from "../../Companenta/Contact Companents/ContactPa
 
 export function Contact() {
 
-    const [user, setUser] = useState([]);
+    const [user] = useState([]);
     const [currentPage, setCurrentPage] = useState(1)
-    const [postsPerPage, setpostsPerPage] = useState(12)
+    const [postsPerPage] = useState(12)
     const lastPostIndex = currentPage * postsPerPage;
     const firstPostIndex = lastPostIndex - postsPerPage;
     const currentUsers = user.slice(firstPostIndex, lastPostIndex);

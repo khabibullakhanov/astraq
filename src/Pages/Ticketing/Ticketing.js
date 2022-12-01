@@ -14,7 +14,7 @@ export function Ticketing() {
 
     const [user, setUser] = useState([]);
     const [currentPage, setCurrentPage] = useState(1)
-    const [postsPerPage, setpostsPerPage] = useState(8)
+    const [postsPerPage] = useState(8)
     useEffect(() => {
         TicketingData()
             .then((data) => {
@@ -25,11 +25,6 @@ export function Ticketing() {
             })
     }, [])
 
-    const [date, setDate] = useState(new Date());
-
-    const onChange = date => {
-        setDate(date);
-    }
 
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 

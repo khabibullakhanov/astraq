@@ -13,7 +13,7 @@ export function DashboarRightCardPagination({ totalPosts, postsPerPage, setCurre
                 pages.map((page, index) => {
                     return (
                         <div key={index}>
-                            <button onClick={() => setCurrentPage(page)} id={page == currentPage ? "active" : ""}>{page}</button>
+                            <button onClick={() => setCurrentPage(page)} id={page === currentPage ? "active" : ""}>{page}</button>
                         </div>
                     )
                 })

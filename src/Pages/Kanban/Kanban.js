@@ -78,20 +78,6 @@ export function Kanban() {
         }
     }
 
-
-    const data = [
-        '#6263',
-        '#BF3325',
-        '#BF3312',
-        '#D82E2F',
-        '#ED4B',
-        '#EF5354',
-        '#B61B',
-        '#E6425E',
-        '#839',
-        '#B9A'
-    ]
-
     const editKanbanItems = () => {
         setDeleteItems(true)
     }
@@ -118,7 +104,7 @@ export function Kanban() {
                     </div>
                     <div id="kanban-star-content">
                         <button>
-                            <Checkbox icon={<img src={greyStar} />} checkedIcon={<img src={yellowStar} />} />
+                            <Checkbox icon={<img src={greyStar} alt=""/>} checkedIcon={<img src={yellowStar} alt=""/>} />
                         </button>
                     </div>
                     <div id='kanban-grey-div-container'>

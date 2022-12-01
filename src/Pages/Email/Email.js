@@ -50,21 +50,18 @@ export function Email() {
     const emailMessages = useSelector((state) => state.reEmailLeftCrud);
     const dispatch = useDispatch();
     const { enqueueSnackbar } = useSnackbar()
-    const [user, setUser] = useState([]);
-    const [currentPage, setCurrentPage] = useState(1)
-    const [postsPerPage, setpostsPerPage] = useState(5)
+    const [user] = useState([]);
+    const [currentPage] = useState(1)
+    const [postsPerPage] = useState(5)
     const [imgEmail, setImgEmail] = useState({
         leftImg: {},
         rightImg: {},
     })
     const [alignLeft, setAlignLeft] = useState(false)
-    const [alignCenter, setAlignCenter] = useState(false)
-    const [alignRight, setAlignRight] = useState(false)
+    const [setAlignCenter] = useState(false)
     const [deleteItem, setDeleteItem] = useState(false)
     const [valueRight, setValueRight] = useState([])
-    const [message, setMessage] = useState([])
     const [modalOpen, setModalOpen] = useState(false)
-    const [newContact, setNewContact] = useState([])
     const [value, setValue] = useState([])
     const [typeHendelSubmit, setTypeHendelSubmit] = useState("Add");
     const [typeHendelSubmitLeft, setTypeHendelSubmitLeft] = useState("Add");
@@ -112,6 +109,7 @@ export function Email() {
     const lastPostIndex = currentPage * postsPerPage;
     const firstPostIndex = lastPostIndex - postsPerPage;
     const currentUsers = user.slice(firstPostIndex, lastPostIndex);
+    console.log(currentUsers);
 
 
     const addNewContact = (e) => {
@@ -262,7 +260,7 @@ export function Email() {
                                                 <div id='email-main-container-left-inside-right-card-item-right-bottom'>
                                                     <p id='grey-color'>{hours}</p>
                                                     <div id='email-main-container-left-inside-right-card-item-right-bottom-inside'>
-                                                        <Checkbox icon={<img src={greyStar} />} checkedIcon={<img src={yellowStar} />} />
+                                                        <Checkbox icon={<img src={greyStar} alt="" />} checkedIcon={<img src={yellowStar} alt="" />} />
                                                         <DeleteIcon style={{ color: "grey" }} onClick={() => {
                                                             dispatch(acEmailDeleteCrud(item.id))
                                                             enqueueSnackbar(`${item.emailContactName} successfully deleted`, {
@@ -304,7 +302,7 @@ export function Email() {
                                 <p id="grey-color">Today, August 30th 2022  04:45 PM</p>
                             </div>
                             <div id='email-main-container-right-report-right'>
-                                <Checkbox icon={<img src={star} />} checkedIcon={<img src={yellowStar} />} />
+                                <Checkbox icon={<img src={star} alt="" />} checkedIcon={<img src={yellowStar} alt="" />} />
 
                                 <img src={undov} alt="" />
                             </div>
@@ -335,7 +333,7 @@ export function Email() {
                     <div id='email-main-container-right-color-container'>
                         <div id='email-main-container-right-color-container-left'>
                             <div id='email-main-container-right-color-container-grey'>
-                                <img src={imgEmail.leftImg.size ? URL.createObjectURL(imgEmail.leftImg) : <AddIcon />} />
+                                <img src={imgEmail.leftImg.size ? URL.createObjectURL(imgEmail.leftImg) : <AddIcon />} alt="" />
                             </div>
                             <div id='email-main-container-right-color-container-bottom'>
                                 <label>
@@ -347,7 +345,7 @@ export function Email() {
                         </div>
                         <div id='email-main-container-right-color-container-left'>
                             <div id='email-main-container-right-color-container-grey'>
-                                <img src={imgEmail.rightImg.size ? URL.createObjectURL(imgEmail.rightImg) : <AddIcon />} />
+                                <img src={imgEmail.rightImg.size ? URL.createObjectURL(imgEmail.rightImg) : <AddIcon />} alt="" />
                             </div>
                             <div id='email-main-container-right-color-container-bottom'>
                                 <label>

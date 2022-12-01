@@ -24,7 +24,6 @@ export function CryptoRight() {
                 <CryptoRightStatistics />
             </div>
             <h2>Recent Trading</h2>
-            <h2></h2>
             <div>
                 <div id="crypto-right-inside-content">
                     <div id="crypto-right-inside-content-first">

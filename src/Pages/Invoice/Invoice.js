@@ -130,7 +130,7 @@ export function Invoice() {
               <div id="invoice-blue-div-bootom-right-first">
                 <div id="invoice-blue-div-bootom-right-first-left">
                   <div id="invoice-blue-bottom-border">
-                    <Checkbox icon={<img src={doubleTrue} />} checkedIcon={<img src={trueIcon} style={{ width: "24px" }} />} />
+                    <Checkbox icon={<img src={doubleTrue}  alt=""/>} checkedIcon={<img src={trueIcon} style={{ width: "24px" }} alt="" />} />
                   </div>
                   <div id="invoie-blue-bottom-text">
                     <p>Invoice Completed </p>
@@ -144,7 +144,7 @@ export function Invoice() {
               <div id="invoice-blue-div-bootom-right-second">
                 <div id="invoice-blue-div-bootom-right-second-left">
                   <div id="invoice-blue-bottom-border">
-                    <Checkbox icon={<img src={doubleTrue} />} checkedIcon={<img src={trueIcon} style={{ width: "24px" }} />} />
+                    <Checkbox icon={<img src={doubleTrue} alt="" />} checkedIcon={<img src={trueIcon} style={{ width: "24px" }} alt="" />} />
                   </div>
                   <div id="invoie-blue-bottom-text">
                     <p>Invoice Sent</p>
@@ -158,7 +158,7 @@ export function Invoice() {
               <div id="invoice-blue-div-bootom-right-third">
                 <div id="invoice-blue-div-bootom-right-third-left">
                   <div id="invoice-blue-bottom-border">
-                    <Checkbox icon={<img src={undovIcon} style={{ width: "24px" }} />} checkedIcon={<img src={trueIcon} style={{ width: "24px" }} />} />
+                    <Checkbox icon={<img src={undovIcon} style={{ width: "24px" }} alt="" />} checkedIcon={<img src={trueIcon} style={{ width: "24px" }} alt="" />} />
                   </div>
                   <div id="invoie-blue-bottom-text">
                     <p>Invoice Pending</p>
@@ -172,7 +172,7 @@ export function Invoice() {
               <div id="invoice-blue-div-bootom-right-fourth">
                 <div id="invoice-blue-div-bootom-right-fourth-left">
                   <div id="invoice-blue-bottom-border">
-                    <Checkbox icon={<img src={soroqIcon} style={{ fontSize: "40px" }} />} checkedIcon={<img src={trueIcon} style={{ width: "24px" }} />} />
+                    <Checkbox icon={<img src={soroqIcon} style={{ fontSize: "40px" }} alt="" />} checkedIcon={<img src={trueIcon} style={{ width: "24px" }} alt="" />} />
                   </div>
                   <div id="invoie-blue-bottom-text">
                     <p>Invoice Unpaid</p>

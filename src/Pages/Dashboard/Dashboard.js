@@ -22,7 +22,7 @@ export function Dashboard() {
 
     const [users, setUsers] = useState([]);
     const [currentPage, setCurrentPage] = useState(1)
-    const [postsPerPage, setpostsPerPage] = useState(2)
+    const [postsPerPage] = useState(2)
 
     useEffect(() => {
         DashboardRightUsers()

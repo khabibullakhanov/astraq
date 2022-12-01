@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import "./ContactUser.css"
 import greyStar from "../../../Assets/Icons/Grey Star.svg"
 import bagImg from "../../../Assets/Icons/Bag.svg"
@@ -24,7 +24,6 @@ export function ContactUser() {
 
     const [row, setRow] = useState(false)
     const [modalOpen, setModalOpen] = useState(false)
-    const [newContact, setNewContact] = useState([])
     const [value, setValue] = useState([])
     const [typeHendelSubmit, setTypeHendelSubmit] = useState("Add");
 
@@ -128,7 +127,7 @@ export function ContactUser() {
 
                                 </div>
                                 <div>
-                                    <Checkbox icon={<img src={greyStar} />} checkedIcon={<img src={yellowStar} />} />
+                                    <Checkbox icon={<img src={greyStar} alt=""/>} checkedIcon={<img src={yellowStar} alt=""/>} />
                                 </div>
                             </div>
                             <div id='user-main-content-text'>

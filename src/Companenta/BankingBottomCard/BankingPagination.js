@@ -14,7 +14,7 @@ export function BankingPagination({ totalPosts, postsPerPage, setCurrentPage, cu
                 pages.map((page, index) => {
                     return (
                         <>
-                            <button onClick={() => setCurrentPage(page)} key={index} id={page == currentPage ? "active" : ""}>{page}</button>
+                            <button onClick={() => setCurrentPage(page)} key={index} className={page === currentPage ? "active" : ""}>{page}</button>
                         </>
                     )
                 })

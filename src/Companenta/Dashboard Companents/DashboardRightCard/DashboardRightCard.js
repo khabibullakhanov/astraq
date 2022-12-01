@@ -22,17 +22,17 @@ export function DashboardRightCard({ users }) {
                             <div id='card-container-header-text'>
                                 <h3>{user.name}</h3>
                                 <div id='card-container-header-star'>
-                                <Checkbox icon={<img src={star} />} checkedIcon={<img src={Greystar} />} />
-                                <Checkbox icon={<img src={star} />} checkedIcon={<img src={Greystar} />} />
-                                <Checkbox icon={<img src={star} />} checkedIcon={<img src={Greystar} />} />
-                                <Checkbox icon={<img src={star} />} checkedIcon={<img src={Greystar} />} />
-                                <Checkbox icon={<img src={Greystar} />} checkedIcon={<img src={star} />} />
+                                <Checkbox icon={<img src={star} alt=""/>} checkedIcon={<img src={Greystar} alt=""/>} />
+                                <Checkbox icon={<img src={star} alt=""/>} checkedIcon={<img src={Greystar} alt=""/>} />
+                                <Checkbox icon={<img src={star} alt=""/>} checkedIcon={<img src={Greystar} alt=""/>} />
+                                <Checkbox icon={<img src={star} alt=""/>} checkedIcon={<img src={Greystar} alt=""/>} />
+                                <Checkbox icon={<img src={Greystar} alt=""/>} checkedIcon={<img src={star} alt=""/>} />
                                 </div>
                             </div>
                         </div>
                         <p>{user.message}</p>
                         <div id='card-container-bottom'>
-                            <a href=""
+                            <a href="#asdas"
                                 // onClick={achive}
                                 onClick={(e) => {
                                     e.preventDefault()
@@ -44,7 +44,7 @@ export function DashboardRightCard({ users }) {
                             >
                                 Achive
                             </a>
-                            <a href="" onClick={(e) => {
+                            <a href="#asdas" onClick={(e) => {
                                 e.preventDefault()
                                 enqueueSnackbar(`${user.name}'s message received 🥳`, {
                                     autoHideDuration: "2000",

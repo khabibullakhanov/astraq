@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import "./Header.css";
 import chat from "../../Assets/Icons/Chat logo.svg";
 import rupor from "../../Assets/Icons/Ovoz kuchaytirgich.svg";
@@ -19,7 +19,7 @@ export function Header() {
   const headerChatCrud = useSelector((state) => state.reHeaderChatCrud)
   const [see, setSee] = useState(false);
   const [value, setValue] = useState([])
-  const [chatImg, setChatImg] = useState({ imgMessage: {}, })
+  const [chatImg] = useState({ imgMessage: {}, })
   const [typeHendelSubmit, setTypeHendelSubmit] = useState("Add");
   const submitChat = (e) => {
     e.preventDefault();

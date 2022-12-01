@@ -32,7 +32,7 @@ export function Banking() {
     const { enqueueSnackbar } = useSnackbar()
     const [users, setUsers] = useState([]);
     const [currentPage, setCurrentPage] = useState(1)
-    const [postsPerPage, setpostsPerPage] = useState(8)
+    const [postsPerPage] = useState(8)
     const [modalOpen, setModalOpen] = useState(false)
     const [value, setValue] = useState([])
     const [typeHendelSubmit, setTypeHendelSubmit] = useState("Add");
@@ -249,7 +249,7 @@ export function Banking() {
                                 <p id='grey-color'>Amount</p>
                                 <input id='font-weight-600' type="number" />
                             </div>
-                            <button id="banking-right-transfer-comtainer-send">Transfer <img src={sendImg} /></button>
+                            <button id="banking-right-transfer-comtainer-send">Transfer <img src={sendImg} alt=""/></button>
                         </div>
                     </div>
                     <div id='banking-main-container-right-saving-container'>

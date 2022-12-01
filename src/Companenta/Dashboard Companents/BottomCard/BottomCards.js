@@ -191,8 +191,8 @@ export function BottomCards() {
                             <h2>Message</h2>
                             <p>You have <span>{contactLength}</span> contacts</p>
                         </div>
-                        <div id='bottom-message-container-right' onClick={() => { navigate("viewAll") }}>
-                            <a href=''>View All</a>
+                        <div id='bottom-message-container-right'>
+                        <a  onClick={() => { navigate("/viewAll") }} href="#dsfds">View All</a>
                         </div>
                     </div>
                     {dashUser.map((contact) => {
